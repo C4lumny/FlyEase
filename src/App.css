@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: center;
-  height: 95px;
+  height: 120px;
 }
 
 .logo {
@@ -13,7 +13,7 @@
 }
 
 .logo .lowfont {
-  font-weight: 400;
+  font-weight: bold;
   font-size: 1.5rem;
   color: #ff3e41;
   cursor: pointer;
@@ -61,7 +61,7 @@
   list-style: none;
   margin: 20px;
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: bold;
   cursor: pointer;
   color: #ff3e41;
 }
@@ -177,4 +177,94 @@
 
 .flights-searcher-input > * {
   margin: 0 10px;
+}
+
+.promos-title{
+  margin-top: 70px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.flyease-promos-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-top: 50px;
+  margin-bottom: 90px;
+}
+
+.promos-container{
+  border: 1px solid #c7c1c1;
+  width: 27%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.promos-container:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.promos-container:not(:hover) {
+  transform: scale(1);
+}
+
+.promos-container-text{
+  margin: 0 20px;
+}
+
+.promos-container-text p{
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.img-circle-promo-container{
+  width: 100%;
+  height: 225px;
+}
+
+.img-circle-promo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #626e78;
+  padding: 30px 0;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.footer p {
+  margin-bottom: 0;
+}
+
+.footer ul {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.footer ul li {
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.footer ul li:last-child {
+  margin-right: 0;
+}
+
+.footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #3e535d;
 }
