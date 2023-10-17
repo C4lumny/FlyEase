@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: center;
-  height: 130px;
+  height: 95px;
 }
 
 .logo {
@@ -46,13 +46,15 @@
 
 .flyease-navs {
   display: flex;
-  width: 35%;
+  width: 45%;
   align-items: center;
+  justify-content: center;
 }
 
 .flyease-navs ul {
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 
 .flyease-navs li {
@@ -82,9 +84,9 @@
 }
 
 .flyEase-img-container {
-  width: 85%;
+  width: 100%;
   height: 65vh;
-  box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.5);
 }
 
 .flyEase-img-container img {
@@ -96,9 +98,8 @@
 
 .image-text {
   position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-25%, -25%);
+  top: 40%;
+  left: 225px;
   color: white;
   font-size: 36px;
   font-weight: bold;
@@ -106,9 +107,8 @@
 
 .flyEase-btnInfo{
   position: absolute;
-  top: 65%;
-  left: 265px;
-  transform: translate(-50%, -50%);
+  top: 55%;
+  left: 225px;
   color: white;
   background-color: #ff3e41;
   font-size: 18px;
@@ -117,4 +117,64 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.fe-searcher-container{
+  margin: 0 auto;
+  width: 90%;
+  margin-top: -90px;
+  position: relative;
+  z-index: 1;
+}
+
+.fe-searcher-container-top {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0 20px;
+  height: 150px;
+  border-radius: 25px;
+}
+
+.container-flightValidation{
+  display: flex;
+  height: 20%;
+  margin-top: 25px;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #626e78;
+  padding: 10px;
+}
+
+.container-flightValidation label{
+  margin-right: 15px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+
+.fe-searcher-container-bot{
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  height: 100px;
+  margin-top: -65px;
+  padding: 0 25px;
+}
+
+.flights-searcher-input {
+  width: 100%;
+  border: none;
+  padding: 0px 40px;
+  font-size: 18px;
+  box-shadow: 0 0 5px 1.5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.flights-searcher-input > * {
+  margin: 0 10px;
 }

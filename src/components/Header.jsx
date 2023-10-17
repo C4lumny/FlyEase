@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./assets/Logo_FlyEase.png";
+import logo from "../assets/Logo_FlyEase.png";
 
 export function Header() {
   return (
@@ -13,9 +13,9 @@ export function Header() {
       {/* Nav divs */}
       <div className="flyease-navs">
         <ul>
-          <li>Lorem ipsum</li>
-          <li>Lorem ipsum</li>
-          <li>Lorem ipsum</li>
+          <li>Inicio</li>
+          <li>Vuelos</li>
+          <li>Acerca de</li>
         </ul>
       </div>
     </header>
