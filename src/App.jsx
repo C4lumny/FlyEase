@@ -27,7 +27,7 @@ export function App() {
         <div className="flyease-promos-container">
           <PromosAndPrices
             ciudad={"Bogota"}
-            descripcion={"El destino mas insano"}
+            descripcion={"La capital de Colombia"}
             imagen={
               "https://elcomercio.pe/resizer/ArFQdIs0LVTdkFUwDBUDhv0N0ac=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/ZTXMI7A35ZDEBA4CXDUGH4BAAE.jpg"
             }
@@ -43,7 +43,7 @@ export function App() {
           />
           <PromosAndPrices
             ciudad={"Bucaramanga"}
-            descripcion={"Rolos hptas"}
+            descripcion={"La ciudad bonita"}
             imagen={
               "https://upload.wikimedia.org/wikipedia/commons/5/54/Bucaramanga_v_cu.JPG"
             }
