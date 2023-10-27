@@ -1,30 +1,30 @@
-.header {
+/* .header {
   display: flex;
   justify-content: center;
   height: 120px;
-}
-
+} */
+/* 
 .logo {
   display: flex;
   gap: 10px;
   margin: 20px;
   align-items: center;
   width: 45%;
-}
+} */
 
-.logo .lowfont {
+/* .logo .lowfont {
   font-weight: bold;
   font-size: 1.5rem;
   color: #ff3e41;
   cursor: pointer;
-}
+} */
 
-.logo img {
+/* .logo img {
   width: 5px;
   cursor: pointer;
-}
+} */
 
-.lowfont:hover {
+/* .lowfont:hover {
   color: #0070ff;
   transition: 0.25s;
 }
@@ -32,9 +32,9 @@
 .lowfont:not(:hover) {
   color: #ff3e41;
   transition: 0.25s;
-}
+} */
 
-.logo img {
+/* .logo img {
   width: 75px;
   cursor: pointer;
   transition: transform 1s ease-in-out;
@@ -42,9 +42,9 @@
 
 .logo img:hover {
   transform: rotate(360deg);
-}
+} */
 
-.flyease-navs {
+/* .flyease-navs {
   display: flex;
   width: 45%;
   align-items: center;
@@ -55,18 +55,18 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-}
+} */
 
-.flyease-navs li {
+/* .flyease-navs li {
   list-style: none;
   margin: 20px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   color: #ff3e41;
-}
+} */
 
-.flyease-navs li:hover {
+/* .flyease-navs li:hover {
   color: #0070ff;
   transition: 0.25s;
 }
@@ -74,7 +74,7 @@
 .flyease-navs li:not(:hover) {
   color: #ff3e41;
   transition: 0.25s;
-}
+} */
 /* Header ends here */
 
 .container-carousel{
