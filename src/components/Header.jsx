@@ -5,7 +5,7 @@ export function Header() {
   return (
     <header className="flex justify-center h-[120px]">
       {/* Logo divs */}
-      <div className="flex gap-2.5 m-5 items-center w-[45%]">
+      <div className="flex gap-2.5 ml-20 items-center w-[45%]">
         <img src={logo} alt="FlyEase-logo" className="w-20 cursor-pointer hover:rotate-[360deg] ease-in-out duration-[1s]" />
         <p className="font-bold text-xl text-[#ff3e41] cursor-pointer hover:text-[#0070ff] transition duration-[0.25s]">FlyEase</p>
       </div>

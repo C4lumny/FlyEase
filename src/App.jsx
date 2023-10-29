@@ -21,10 +21,10 @@ export function App() {
 
         <Searcher />
         {/* Promos */}
-        <h1 className="promos-title">
+        <h1 className="mt-[100px] mb-[60px] text-center font-medium text-4xl">
           ¡Tu destino favorito a precios imperdibles!
         </h1>
-        <div className="flyease-promos-container">
+        <div className="flex justify-center items-center gap-24 mt-14 mb-24 flex-wrap">
           <PromosAndPrices
             ciudad={"Bogota"}
             descripcion={"La capital de Colombia"}
