@@ -3,9 +3,12 @@ import { ImagesCarousel } from "./components/images-carousel";
 import { Searcher } from "./components/flights-searcher";
 import { PromosAndPrices } from "./components/promos-and-prices";
 import { Footer } from "./components/Footer-flyease";
-import "./App.css";
+import { fetchData } from "./api/fetchData";
+import { Suspense } from "react";
 
 export function App() {
+  const apiData = fetchData("http://www.flyease.somee.com/Clientes/GetAll");
+  console.log(apiData);
   return (
     <>
       <Header />
