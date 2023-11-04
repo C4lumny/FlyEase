@@ -3,12 +3,12 @@ import { ImagesCarousel } from "../common/Images-carousel";
 import { Searcher } from "../common/Flights-searcher";
 import { PromosAndPrices } from "../common/Promos-and-prices";
 import { Footer } from "../common/Footer-flyease";
-import { useFetch } from "../../hooks/useFetch";
 import Imagen from "../../assets/mujer-en-la-playa.jpg";
+// import { useFetch } from "../../hooks/useFetch";
 
 export function Home() {
-    const apiData = useFetch("http://www.flyease.somee.com/FlyEaseApi/Clientes/GetAll");
-    console.log(apiData);
+    // const apiData = useFetch("/Clientes/GetAll");
+    // console.log(apiData);
   
     return (
     <>
