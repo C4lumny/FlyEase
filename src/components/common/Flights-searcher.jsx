@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export function Searcher() {
   const [flightType, setFlightType] = useState("Solo-ida");
@@ -9,7 +9,7 @@ export function Searcher() {
 
   return (
     <div className="flex justify-center">
-      <div className="sticky w-2/3 h-60 bg-gray-700 text-white rounded-lg -mt-24">
+      <div className="sticky w-2/3 h-60 bg-gray-700 text-white rounded-3xl -mt-24">
         <div className="m-10">
           {/* Ida y vuelta */}
           <div className="flex">
