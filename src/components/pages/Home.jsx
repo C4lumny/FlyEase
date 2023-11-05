@@ -1,5 +1,4 @@
 import { Header } from "../common/Header";
-import { ImagesCarousel } from "../common/Images-carousel";
 import { Searcher } from "../common/Flights-searcher";
 import { PromosAndPrices } from "../common/Promos-and-prices";
 import { Footer } from "../common/Footer-flyease";
@@ -7,23 +6,31 @@ import Imagen from "../../assets/mujer-en-la-playa.jpg";
 // import { useFetch } from "../../hooks/useFetch";
 
 export function Home() {
-    // const apiData = useFetch("/Clientes/GetAll");
-    // console.log(apiData);
-  
-    return (
+  // const apiData = useFetch("/Clientes/GetAll");
+  // console.log(apiData);
+
+  return (
     <>
       <Header />
       {/* Header ends here  */}
       <main>
-        <ImagesCarousel
-          source={
-            Imagen
-          }
-          text={"EXPLORA, SUEÑA, DESCUBRE"}
-          btnText={"¡Conoce más!"}
-        />
-
-        <Searcher />
+        <div className="relative flex justify-center items-center">
+          <div className="relative w-full h-1/2 shadow-[0_0_15px_4px_rgba(0,0,0,0.5)]">
+            <img
+              src={Imagen}
+              alt="img-banner"
+              className="w-full max-w-max object-fill brightness-[70%]"
+            />
+            <div className="absolute inset-0 flex justify-center items-start top-[10%] pt-10 z-0">
+              <p className="text-white text-4xl font-bold">
+                EXPLORA, SUEÑA, DESCUBRE
+              </p>
+            </div>
+            <div className="absolute inset-0 flex justify-center items-center top-[1%] z-10">
+              <Searcher />
+            </div>
+          </div>
+        </div>
         {/* Promos */}
         <h1 className="mt-[100px] mb-[60px] text-center font-medium text-4xl">
           ¡Tu destino favorito a precios imperdibles!

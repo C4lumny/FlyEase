@@ -1,93 +1,78 @@
 import { useState } from "react";
 
 export function Searcher() {
-  const [flightType, setFlightType] = useState("Solo-ida");
+  const [activeItem, setActiveItem] = useState(null);
 
-  const handleFlightTypeChange = (event) => {
-    setFlightType(event.target.id);
+  const handleItemClick = (index) => {
+    setActiveItem(index);
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="sticky w-2/3 h-60 bg-gray-700 text-white rounded-3xl -mt-24">
-        <div className="m-10">
-          {/* Ida y vuelta */}
-          <div className="flex">
-            <p className="font-bold text-3xl mr-10">Vuelos</p>
-            <div className="flex gap-10 font-medium text-2xl">
-              <label htmlFor="Solo-ida" className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="flightType"
-                  id="Solo-ida"
-                  checked={flightType === "Solo-ida"}
-                  onChange={handleFlightTypeChange}
-                />
-                Solo ida
-              </label>
-              <label htmlFor="Ida-vuelta" className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="flightType"
-                  id="Ida-vuelta"
-                  checked={flightType === "Ida-vuelta"}
-                  onChange={handleFlightTypeChange}
-                />
-                Ida y vuelta
-              </label>
-            </div>
+    <div className="w-[60%] m-0">
+      {/* Tipo de servicio */}
+      <div className="relative flex bg-[rgba(0,0,0,0.6)] items-center border-b border-white text-white box-border">
+        <ul className="flex h-16">
+          <li
+            className={`p-4 text-center w-36 cursor-pointer ${
+              activeItem === 0
+                ? "border-b-2 bg-[rgba(0,0,0,0.4)]"
+                : "hover:border-b-2 "
+            }`}
+            onClick={() => handleItemClick(0)}
+          >
+            Vuelos
+          </li>
+          <li
+            className={`p-4 text-center w-36 cursor-pointer ${
+              activeItem === 1
+                ? "border-b-2 bg-[rgba(0,0,0,0.4)]"
+                : "hover:border-b-2"
+            }`}
+            onClick={() => handleItemClick(1)}
+          >
+            Reservas
+          </li>
+        </ul>
+      </div>
+      {/* Buscador de vuelos */}
+      <div className="bg-[rgba(0,0,0,0.7)] p-5 text-white ">
+        {/* Radio buttons */}
+        <div className="flex py-4 gap-8">
+          <label htmlFor="ida" className="flex gap-3 items-center">
+            <input type="radio" name="viaje" id="ida" className="h-4 w-4" />
+            <p>Solo ida</p>
+          </label>
+          <label htmlFor="ida-vuelta" className="flex gap-3 items-center">
+            <input
+              type="radio"
+              name="viaje"
+              id="ida-vuelta"
+              className="h-4 w-4"
+            />
+            <p>Ida y vuelta</p>
+          </label>
+        </div>
+        {/* Inputs */}
+        <div className="flex text-black mt-5">
+          <div>
+            <p className="text-white mb-2 text-sm">Origen</p>
+            <select name="" id="" className="w-64 h-10 border text-sm">
+              <option value="" selected disabled>
+                Seleccione el origen
+              </option>
+            </select>
           </div>
-          {/* Searcher */}
-          <div className="flex items-center h-32">
-            <div className="flex gap-10">
-              {flightType === "Solo-ida" && (
-                <div className="flex text-center items-center gap-2">
-                  <p>Desde: </p>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Ingrese desde dónde"
-                    className="text-black h-10 px-2 rounded-lg border-2 border-gray-300"
-                  />
-                </div>
-              )}
-              {flightType === "Ida-vuelta" && (
-                <div className="flex items-center text-center gap-2">
-                  <p>Desde: </p>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Ingrese desde dónde"
-                    className="text-black h-10 px-2 rounded-lg border-2 border-gray-300"
-                  />
-                  <p>Hacia: </p>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Ingrese hacia dónde"
-                    className="text-black h-10 px-2 rounded-lg border-2 border-gray-300"
-                  />
-                </div>
-              )}
-              <div className="flex items-center text-center gap-2">
-                <p>Fecha: </p>
-                <input
-                  type="date"
-                  name=""
-                  id=""
-                  placeholder="Ingrese fecha"
-                  className="text-black h-10 px-2 rounded-lg border-2 border-gray-300"
-                />
-              </div>
-              <div className="">
-                  <button className="ml-10 bg-red-500 w-36 h-10 my-button rounded-lg cursor-pointer">¡A volar!</button> 
-              </div>
-            </div>
+           <div>
+            <p className="text-white mb-2 text-sm">Origen</p>
+            <select name="" id="" className="w-64 h-10 border text-sm">
+              <option value="" selected disabled>
+                Seleccione el origen
+              </option>
+            </select>
           </div>
         </div>
+        {/* Boton comprar */}
+        <button className="my-9 bg-red-500 py-3 px-8 rounded-3xl">Comprar</button>
       </div>
     </div>
   );
