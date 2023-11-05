@@ -1,17 +1,47 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import mapIcon from "../../assets/mapPin.svg";
 
 export function Searcher() {
   const [activeItem, setActiveItem] = useState(null);
+  const [isActive, setIsActive] = useState(false);
   const {data, loading, error} = useFetch("/Clientes/GetAll");
+  const [results, setResults] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const searchTimeout = useRef(null);
 
   const handleItemClick = (index) => {
     setActiveItem(index);
   };
 
+  console.log(results);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (searchTimeout.current) {
+      clearTimeout(searchTimeout.current);
+    }
+
+    searchTimeout.current = setTimeout(() => {
+      if (value === "") {
+        // No hay texto en el input, no actualices 'results'
+        setResults([]);
+      } else {
+        const filtered = filteredResults(value);
+        setResults(filtered);
+      }
+    }, 500);
+  }
+
+  const filteredResults = (wordSearched) =>{
+    var results = data.filter((item) => item.nombres.toLowerCase().startsWith(wordSearched.toLowerCase())); 
+    return results;
+  }
+
   return (
-    <div className="w-[60%] m-0">
+    <div className="w-[80%] m-0">
       {/* Tipo de servicio */}
       <div className="relative flex bg-[rgba(0,0,0,0.6)] items-center border-b border-white text-white box-border">
         <ul className="flex h-16">
@@ -64,16 +94,32 @@ export function Searcher() {
               <input
                 className="w-64 h-10 border text-sm pl-8"
                 type="text"
-                placeholder="Origen"
+                placeholder="Ciudad de origen"
+                value={inputValue}
+                onChange={handleInputChange}
+                onFocus={() => setIsActive(true)}
+                onBlur={() => {
+                  setTimeout(() => {
+                    setIsActive(false);
+                  }, 100);
+                }}
               />
             </div>
-            <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer hidden">
-              {data?.map((item) => (
-                <li key={item.numerodocumento} className="p-1 hover:bg-blue-300 hover:text-blue-600">
-                  {item.nombres}
-                </li>
-              ))}
-            </ul>
+            {isActive && inputValue && (
+              <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer">
+                {results.length > 0 && results.some(result => result.nombres.includes(inputValue)) ? (
+                  results.map((item) => (
+                    <li key={item.numerodocumento} className="p-1 hover:bg-blue-300 hover:text-blue-600" onClick={() => setInputValue(item.nombres)}>
+                      {item.nombres}
+                    </li>
+                  ))
+                ) : inputValue && !results.some(result => result.nombres.includes(inputValue)) ? (
+                  <li className="p-1 text-center">
+                    No se encontraron resultados
+                  </li>
+                ) : null}
+              </ul>
+            )}
           </div>
           <div>
             <p className="text-white mb-2 text-sm">Destino</p>
@@ -82,7 +128,7 @@ export function Searcher() {
               <input
                 className="w-64 h-10 border text-sm pl-8"
                 type="text"
-                placeholder="Destino"
+                placeholder="Ciudad de destino"
               />
             </div>
             <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer hidden">
