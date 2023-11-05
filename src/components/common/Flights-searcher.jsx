@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useFetch } from "../../hooks/useFetch";
+import mapIcon from "../../assets/mapPin.svg";
 
 export function Searcher() {
   const [activeItem, setActiveItem] = useState(null);
+  const {data, loading, error} = useFetch("/Clientes/GetAll");
 
   const handleItemClick = (index) => {
     setActiveItem(index);
@@ -56,23 +59,45 @@ export function Searcher() {
         <div className="flex text-black mt-5">
           <div>
             <p className="text-white mb-2 text-sm">Origen</p>
-            <select name="" id="" className="w-64 h-10 border text-sm">
-              <option value="" selected disabled>
-                Seleccione el origen
-              </option>
-            </select>
+            <div className="flex relative items-center">
+              <img src={mapIcon} alt="" className="absolute h-4 w-4 left-2" />
+              <input
+                className="w-64 h-10 border text-sm pl-8"
+                type="text"
+                placeholder="Origen"
+              />
+            </div>
+            <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer hidden">
+              {data?.map((item) => (
+                <li key={item.numerodocumento} className="p-1 hover:bg-blue-300 hover:text-blue-600">
+                  {item.nombres}
+                </li>
+              ))}
+            </ul>
           </div>
-           <div>
-            <p className="text-white mb-2 text-sm">Origen</p>
-            <select name="" id="" className="w-64 h-10 border text-sm">
-              <option value="" selected disabled>
-                Seleccione el origen
-              </option>
-            </select>
+          <div>
+            <p className="text-white mb-2 text-sm">Destino</p>
+            <div className="flex relative items-center">
+              <img src={mapIcon} alt="" className="absolute h-4 w-4 left-2" />
+              <input
+                className="w-64 h-10 border text-sm pl-8"
+                type="text"
+                placeholder="Destino"
+              />
+            </div>
+            <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer hidden">
+              {data?.map((item) => (
+                <li key={item.numerodocumento} className="p-1 hover:bg-blue-300 hover:text-blue-600">
+                  {item.nombres}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         {/* Boton comprar */}
-        <button className="my-9 bg-red-500 py-3 px-8 rounded-3xl">Comprar</button>
+        <button className="my-9 bg-red-500 py-3 px-8 rounded-3xl">
+          Comprar
+        </button>
       </div>
     </div>
   );

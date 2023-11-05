@@ -15,18 +15,18 @@ export function Home() {
       {/* Header ends here  */}
       <main>
         <div className="relative flex justify-center items-center">
-          <div className="relative w-full h-1/2 shadow-[0_0_15px_4px_rgba(0,0,0,0.5)]">
+          <div className="relative w-full h-4/5 shadow-[0_8px_6px_-6px_black]">
             <img
               src={Imagen}
               alt="img-banner"
-              className="w-full max-w-max object-fill brightness-[70%]"
+              className=" object-fill brightness-[70%]"
             />
-            <div className="absolute inset-0 flex justify-center items-start top-[10%] pt-10 z-0">
+            <div className="absolute inset-0 flex justify-center items-start top-[5%] pt-10 z-0">
               <p className="text-white text-4xl font-bold">
                 EXPLORA, SUEÑA, DESCUBRE
               </p>
             </div>
-            <div className="absolute inset-0 flex justify-center items-center top-[1%] z-10">
+            <div className="absolute inset-0 flex justify-center items-center top-[15%] z-10">
               <Searcher />
             </div>
           </div>

@@ -31,7 +31,7 @@ export function About() {
             </p>
           </div>
           <div className="flex justify-center items-center w-1/2">
-            <img src={plane} alt="avion volando" className="w-2/3" />
+            <img src={plane} alt="avion volando" className="w-4/5" />
           </div>
         </div>
         {/* Equipo */}
