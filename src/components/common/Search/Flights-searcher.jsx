@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useFetch } from "../../hooks/useFetch";
+import { useFetch } from "../../../hooks/useFetch";
 import mapIcon from "../../assets/mapPin.svg";
 
 export function Searcher() {
@@ -8,7 +8,7 @@ export function Searcher() {
   const [isActive, setIsActive] = useState(false);
   const { data, loading, error } = useFetch("/Clientes/GetAll");
   const [results, setResults] = useState([]);
-  const [inputEnabled, setInputEnabled] = useState(false);
+  const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [dateReturn, setDateReturn] = useState("");
   // Contador para saber cuando realizar la busqueda a la api
@@ -85,11 +85,11 @@ export function Searcher() {
         {/* Radio buttons */}
         <div className="flex py-4 gap-8">
           <label htmlFor="ida" className="flex gap-3 items-center">
-            <input type="radio" name="viaje" id="ida" onChange={() => setInputEnabled(true)} className="h-4 w-4" />
+            <input defaultChecked type="radio" name="viaje" id="ida" onChange={() => setIsRoundTrip(false)} className="h-4 w-4" />
             <p>Solo ida</p>
           </label>
           <label htmlFor="ida-vuelta" className="flex gap-3 items-center">
-            <input type="radio" name="viaje" id="ida-vuelta" onChange={() => setInputEnabled(false)} className="h-4 w-4" />
+            <input type="radio" name="viaje" id="ida-vuelta" onChange={() => setIsRoundTrip(true)} className="h-4 w-4" />
             <p>Ida y vuelta</p>
           </label>
         </div>
@@ -170,7 +170,7 @@ export function Searcher() {
                   type="date"
                   placeholder="Ciudad de destino"
                   min={formatDate(dateRet)}
-                  disabled={inputEnabled ? true : false}
+                  disabled={isRoundTrip ? false : true}
                 />
               </div>
             </div>
