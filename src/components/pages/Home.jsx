@@ -1,5 +1,5 @@
 import { Header } from "../common/Header";
-import { Searcher } from "../common/Flights-searcher";
+import { TravelSearcher } from "../common/Search/TravelSearcher";
 import { PromosAndPrices } from "../common/Promos-and-prices";
 import { Footer } from "../common/Footer-flyease";
 import Imagen from "../../assets/mujer-en-la-playa.jpg";
@@ -27,7 +27,7 @@ export function Home() {
               </p>
             </div>
             <div className="absolute inset-0 flex justify-center items-center top-[15%] z-10">
-              <Searcher />
+              <TravelSearcher />
             </div>
           </div>
         </div>
