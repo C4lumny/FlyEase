@@ -35,7 +35,6 @@ export function TravelSearcher() {
       </div>
       {/* Buscador de vuelos */}
       <div className="bg-[rgba(0,0,0,0.7)] p-5 text-white">
-          
           {activeItem === 0 ? <SearcherForm /> : <Lookup />}
       </div>
     </div>

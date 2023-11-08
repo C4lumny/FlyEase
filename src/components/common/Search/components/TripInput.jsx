@@ -15,6 +15,7 @@ export function TripInput({ placeholder, data }) {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
+    setInputValue(value);
 
     if (searchTimeout.current) {
       clearTimeout(searchTimeout.current);

@@ -29,28 +29,29 @@ export function SearcherForm() {
         <div>Cargando..</div>
       ) : (
         <div className="flex py-4 gap-8">
-        <label htmlFor="ida" className="flex gap-3 items-center">
-          <input
-            defaultChecked
-            type="radio"
-            name="viaje"
-            id="ida"
-            onChange={() => setIsRoundTrip(false)}
-            className="h-4 w-4"
-          />
-          <p>Solo ida</p>
-        </label>
-        <label htmlFor="ida-vuelta" className="flex gap-3 items-center">
-          <input type="radio" name="viaje" id="ida-vuelta" onChange={() => setIsRoundTrip(true)} className="h-4 w-4" />
-          <p>Ida y vuelta</p>
-        </label>
-      </div>
+          <label htmlFor="ida" className="flex gap-3 items-center">
+            <input
+              defaultChecked
+              type="radio"
+              name="viaje"
+              id="ida"
+              onChange={() => setIsRoundTrip(false)}
+              className="h-4 w-4"
+            />
+            <p>Solo ida</p>
+          </label>
+          <label htmlFor="ida-vuelta" className="flex gap-3 items-center">
+            <input type="radio" name="viaje" id="ida-vuelta" onChange={() => setIsRoundTrip(true)} className="h-4 w-4" />
+            <p>Ida y vuelta</p>
+          </label>
+        </div>
+      )}
       {/* Inputs */}
       <div className="flex text-black mt-5">
         {/* input origen */}
-          <TripInput placeholder="Ciudad de origen" data={data} />
+        <TripInput placeholder="Ciudad de origen" data={data} />
         {/* input destino */}
-          <TripInput placeholder="Ciudad de destino" data={data}/>
+        <TripInput placeholder="Ciudad de destino" data={data}/>
         <div className="ml-10 flex">
           {/* input fecha ida */}
           <div>
@@ -84,7 +85,6 @@ export function SearcherForm() {
       <button type="button" className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60">
         Comprar 
       </button>
-      )}
     </div>
   );
 }
