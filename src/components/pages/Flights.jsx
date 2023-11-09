@@ -4,15 +4,24 @@ import { useFetch } from "../../hooks/useFetch";
 import { FlightCard } from "../common/FlightCard";
 
 export function Flights() {
-  const apiData = useFetch("/Boletos/GetAll")
-  console.log(apiData);
-  
+  const { data, error, loading } = useFetch("/Vuelos/GetAll");
+
   return (
     <>
       <Header />
       <main>
-        <h1>Vuelos disponibles</h1>
-        <FlightCard />
+        <h1 className="">Vuelos disponibles</h1>
+        {loading ? (
+          <p>Cargando...</p>
+        ) : error ? (
+          <p>Ha ocurrido un error: {error}</p>
+        ) : (
+          <div>
+            {data?.map((vuelo) => (
+              <FlightCard key={vuelo.idvuelo} vuelo={vuelo} />
+            ))}
+          </div>
+        )}
       </main>
       <Footer />
     </>

@@ -7,7 +7,7 @@ export function useFetch(endpoint){
  
     useEffect(() => {
       setLoading(true);
-      fetch(`http://www.flyease.somee.com/FlyEaseApi${endpoint}`)
+      fetch(`https://www.flyease.somee.com/FlyEaseApi${endpoint}`)
         .then((response) => response.json())
         .then((data) => setData(data.response))
         .catch((error) => setError(error))

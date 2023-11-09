@@ -28,7 +28,7 @@ export function Header() {
             <Link to="/Vuelos">Vuelos</Link>
           </li>
           <li className="list-none text-xl font-bold cursor-pointer text-white hover:text-yellow-200 duration-[0.25s]">
-            <Link to="/About">Acerca</Link> de
+            <Link to="/About">Acerca de</Link> 
           </li>
         </ul>
       </div>
