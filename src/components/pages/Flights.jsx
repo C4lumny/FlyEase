@@ -1,5 +1,5 @@
-import { Header } from "../common/Header";
 import { Footer } from "../common/Footer-flyease";
+import { Header } from "../common/Header";
 import { useFetch } from "../../hooks/useFetch";
 import { FlightCard } from "../common/FlightCard";
 
