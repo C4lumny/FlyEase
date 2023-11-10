@@ -16,7 +16,7 @@ export function Flights() {
         ) : error ? (
           <p>Ha ocurrido un error: {error}</p>
         ) : (
-          <div>
+          <div className="flex justify-center gap-10 my-10 flex-wrap">
             {data?.map((vuelo) => (
               <FlightCard key={vuelo.idvuelo} vuelo={vuelo} />
             ))}
