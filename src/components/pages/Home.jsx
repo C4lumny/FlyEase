@@ -3,11 +3,10 @@ import { TravelSearcher } from "../common/Search/TravelSearcher";
 import { PromosAndPrices } from "../common/Promos-and-prices";
 import { Footer } from "../common/Footer-flyease";
 import Imagen from "../../assets/mujer-en-la-playa.jpg";
-// import { useFetch } from "../../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 
 export function Home() {
-  // const apiData = useFetch("/Clientes/GetAll");
-  // console.log(apiData);
+  const apiData = useFetch("/Clientes/GetAll");
 
   return (
     <>
@@ -16,15 +15,9 @@ export function Home() {
       <main>
         <div className="relative flex justify-center items-center">
           <div className="relative w-full h-4/5 shadow-[0_8px_6px_-6px_black]">
-            <img
-              src={Imagen}
-              alt="img-banner"
-              className=" object-fill brightness-[70%]"
-            />
+            <img src={Imagen} alt="img-banner" className=" object-fill brightness-[70%]" />
             <div className="absolute inset-0 flex justify-center items-start top-[5%] pt-10 z-0">
-              <p className="text-white text-4xl font-bold">
-                EXPLORA, SUEÑA, DESCUBRE
-              </p>
+              <p className="text-white text-4xl font-bold">EXPLORA, SUEÑA, DESCUBRE</p>
             </div>
             <div className="absolute inset-0 flex justify-center items-center top-[15%] z-10">
               <TravelSearcher />
@@ -47,17 +40,13 @@ export function Home() {
           <PromosAndPrices
             ciudad={"Valledupar"}
             descripcion={"Capital mundial del vallenato"}
-            imagen={
-              "https://www.ghlhoteles.com/uploads/cms_apps/imagenes/Valledupar.jpg"
-            }
+            imagen={"https://www.ghlhoteles.com/uploads/cms_apps/imagenes/Valledupar.jpg"}
             precio={"10.000$ COP"}
           />
           <PromosAndPrices
             ciudad={"Bucaramanga"}
             descripcion={"La ciudad bonita"}
-            imagen={
-              "https://upload.wikimedia.org/wikipedia/commons/5/54/Bucaramanga_v_cu.JPG"
-            }
+            imagen={"https://upload.wikimedia.org/wikipedia/commons/5/54/Bucaramanga_v_cu.JPG"}
             precio={"1.000.000$ COP"}
           />
         </div>

@@ -1,17 +1,12 @@
 //Mostrar titulo del vuelo (Nombre origen + Nombre destino)
 //Mostrar imagen del vuelo
 //Mostrar precio
-// ssyrSifxFS68UsjvkjjMnVyPlriAjg6eyiEprDxWAcxjsvtyBOLcX24R
+// AIzaSyCWqBql4PAkcyYoXfrLxPN71eSy2Q4JECY
 
 import { useState } from "react";
-import { createClient } from "pexels";
 
 export function FlightCard({ vuelo }) {
   const [isHovered, setIsHovered] = useState(false);
-  const client = createClient("ssyrSifxFS68UsjvkjjMnVyPlriAjg6eyiEprDxWAcxjsvtyBOLcX24R");
-  const photo = client.photos.search({query: "bogota"});
-
-  console.log(photo);
 
   return (
     <section
@@ -22,8 +17,7 @@ export function FlightCard({ vuelo }) {
       <picture className="w-1/2">
         <img
           className="h-[13.9rem] brightness-75 w-full object-cover"
-          // src={`data:image/jpeg;base64, ${vuelo.aereopuerto_Destino.ciudad.imagen}`}
-          src={client.photos.search()}
+          src={`data:image/webp;base64, ${vuelo.aereopuerto_Destino.ciudad.imagen}`}
           alt="imagen ciudad"
         />
       </picture>
@@ -37,7 +31,7 @@ export function FlightCard({ vuelo }) {
           ${vuelo.preciovuelo}
         </p>
         <div className="flex h-2/5 items-center justify-center ">
-          <button type="button" className="mt-4 py-3 px-10 bg-yellow-300 rounded text-[#dd2b23] font-medium">
+          <button type="button" className="mt-4 py-3 px-10 bg-yellow-300 rounded text-[#dd2b23] font-medium duration-500 hover:ease-in-out hover:scale-110">
             Comprar
           </button>
         </div>

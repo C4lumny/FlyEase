@@ -9,7 +9,7 @@ export function About() {
       <Header />
       <main>
         {/* Explicando FlyEase */}
-        <div className=" p-7 w-full flex">
+        <div className=" p-7 w-full flex bg-white">
           <div className="ml-12 my-12 w-1/2">
             <h1 className="text-3xl font-medium">¿Qué es FlyEase?</h1>
             <p className="mt-2">
@@ -35,7 +35,7 @@ export function About() {
           </div>
         </div>
         {/* Equipo */}
-        <div className="mb-12">
+        <div className="mb-12 bg-white">
           <div className="flex justify-center">
             <h1 className="text-3xl font-semibold">Integrantes</h1>
           </div>
