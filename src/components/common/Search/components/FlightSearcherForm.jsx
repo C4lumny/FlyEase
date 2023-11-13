@@ -5,8 +5,8 @@ import { TripInput } from "./TripInput";
 export function SearcherForm() {
   const { data, loading, error } = useFetch("/Ciudades/GetAll");
   const [isRoundTrip, setIsRoundTrip] = useState(false);
-  const [dateReturn, setDateReturn] = useState("");
-  const [dateDeparture, setDateDeparture] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
   // Atributos para validad input de fecha
   const date = new Date();
 
@@ -18,8 +18,6 @@ export function SearcherForm() {
 
     return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
   };
-
-  console.log(dateDeparture)
 
   return (
     <div>
@@ -84,15 +82,11 @@ export function SearcherForm() {
                     className="w-48 h-10 border text-sm pl-8"
                     type="date"
                     placeholder="Ciudad de destino"
-                    min={dateDeparture && Date(dateDeparture) > date ? (
-                      formatDate(dateDeparture)
-                    ) : (
-                      formatDate(date)
-                    )}
+                    min={formatDate(date)}
                     onChange={(e) => {
-                      const dateRetPlus1 = new Date(e.target.value);
-                      dateRetPlus1.setDate(dateRetPlus1.getDate() + 1);
-                      setDateReturn(dateRetPlus1);
+                      const dateDepPlus1 = new Date(e.target.value);
+                      dateDepPlus1.setDate(dateDepPlus1.getDate() + 1);
+                      setDepartureDate(dateDepPlus1);
                     }}
                   />
                 </div>
@@ -100,19 +94,21 @@ export function SearcherForm() {
               {/* input fecha vuelta */}
               <div className="">
                 <p className="text-white mb-2 text-sm">Vuelta</p>
-                <div className="flex relative items-center">
+                <div className="relative items-center">
                   <input
                     className="w-48 h-10 border text-sm pl-8"
                     type="date"
                     placeholder="Ciudad de destino"
-                    min={!dateReturn ? formatDate(date) : formatDate(dateReturn)}
+                    value={new Date(departureDate) > new Date(returnDate) ? formatDate(departureDate) : formatDate(returnDate)}
+                    min={!departureDate ? formatDate(date) : formatDate(departureDate)}
                     onChange={(e) => {
-                      const dateDepPlus1 = new Date(e.target.value);
-                      dateDepPlus1.setDate(dateDepPlus1.getDate() + 1);
-                      setDateDeparture(dateDepPlus1)
+                      const dateRetPlus1 = new Date(e.target.value);
+                      dateRetPlus1.setDate(dateRetPlus1.getDate() + 1);
+                      setReturnDate(dateRetPlus1)
                     }}
-                    disabled={isRoundTrip ? false : true}
+                    disabled={(!isRoundTrip || !departureDate) ? true : false}
                   />
+                  <span className={`text-red-500 block absolute ${!isRoundTrip || departureDate ? "hidden" : ""}`}>Seleccione una fecha de ida</span>
                 </div>
               </div>
             </div>
