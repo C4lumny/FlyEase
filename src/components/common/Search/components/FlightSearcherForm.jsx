@@ -84,7 +84,7 @@ export function SearcherForm() {
                     className="w-48 h-10 border text-sm pl-8"
                     type="date"
                     placeholder="Ciudad de destino"
-                    min={dateDeparture && new Date(dateDeparture) < date ? (
+                    min={dateDeparture && Date(dateDeparture) > date ? (
                       formatDate(dateDeparture)
                     ) : (
                       formatDate(date)
