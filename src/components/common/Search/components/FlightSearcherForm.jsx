@@ -3,13 +3,12 @@ import { useFetch } from "../../../../hooks/useFetch";
 import { TripInput } from "./TripInput";
 
 export function SearcherForm() {
-  const { data, loading, error } = useFetch("/Clientes/GetAll");
+  const { data, loading, error } = useFetch("/Ciudades/GetAll");
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [dateReturn, setDateReturn] = useState("");
+  const [dateDeparture, setDateDeparture] = useState("");
   // Atributos para validad input de fecha
   const date = new Date();
-  const dateRet = new Date(dateReturn);
-  dateRet.setDate(dateRet.getDate() + 1);
 
   const formatDate = (date) => {
     const d = new Date(date),
@@ -19,6 +18,8 @@ export function SearcherForm() {
 
     return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
   };
+
+  console.log(dateDeparture)
 
   return (
     <div>
@@ -83,8 +84,16 @@ export function SearcherForm() {
                     className="w-48 h-10 border text-sm pl-8"
                     type="date"
                     placeholder="Ciudad de destino"
-                    min={formatDate(date)}
-                    onChange={(e) => setDateReturn(new Date(e.target.value))}
+                    min={dateDeparture && new Date(dateDeparture) < date ? (
+                      formatDate(dateDeparture)
+                    ) : (
+                      formatDate(date)
+                    )}
+                    onChange={(e) => {
+                      const dateRetPlus1 = new Date(e.target.value);
+                      dateRetPlus1.setDate(dateRetPlus1.getDate() + 1);
+                      setDateReturn(dateRetPlus1);
+                    }}
                   />
                 </div>
               </div>
@@ -96,7 +105,12 @@ export function SearcherForm() {
                     className="w-48 h-10 border text-sm pl-8"
                     type="date"
                     placeholder="Ciudad de destino"
-                    min={formatDate(dateRet)}
+                    min={!dateReturn ? formatDate(date) : formatDate(dateReturn)}
+                    onChange={(e) => {
+                      const dateDepPlus1 = new Date(e.target.value);
+                      dateDepPlus1.setDate(dateDepPlus1.getDate() + 1);
+                      setDateDeparture(dateDepPlus1)
+                    }}
                     disabled={isRoundTrip ? false : true}
                   />
                 </div>
