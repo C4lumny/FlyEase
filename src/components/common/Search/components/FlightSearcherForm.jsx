@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "../../../../hooks/useFetch";
 import { TripInput } from "./TripInput";
 
@@ -18,6 +18,10 @@ export function SearcherForm() {
 
     return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
   };
+
+  useEffect(() => {
+    if(!isRoundTrip && returnDate) setReturnDate("");
+  }, [isRoundTrip, returnDate]);
 
   return (
     <div>
@@ -43,6 +47,7 @@ export function SearcherForm() {
       ) : error ? (
         <div>Error: {error}</div>
       ) : (
+        // Radio buttons ida y vuelta
         <div>
           <div className="flex py-4 gap-8">
             <label htmlFor="ida" className="flex gap-3 items-center">

@@ -3,10 +3,11 @@ import { TravelSearcher } from "../common/Search/TravelSearcher";
 import { PromosAndPrices } from "../common/Promos-and-prices";
 import { Footer } from "../common/Footer-flyease";
 import Imagen from "../../assets/mujer-en-la-playa.jpg";
-import { useFetch } from "../../hooks/useFetch";
+import { usePostApi } from "../../hooks/usePost";
 
 export function Home() {
-  const apiData = useFetch("/Clientes/GetAll");
+
+  console.log(usePostApi());
 
   return (
     <>

@@ -10,7 +10,7 @@ export function FlightCard({ vuelo }) {
 
   return (
     <section
-      className="w-[45%] h-56 flex border border-gray-500 text-gray-600 hover:bg-[#dd2b23] hover:text-white"
+      className="w-[45%] h-56 flex border border-gray-300 text-gray-600 hover:bg-[#dd2b23] hover:text-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

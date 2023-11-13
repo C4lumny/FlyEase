@@ -5,7 +5,7 @@ import { FlightCard } from "../common/FlightCard";
 import { Loader } from "./Loader";
 
 export function Flights() {
-  const { data, error, loading } = useFetch("/Vuelos/GetAll");
+  const { data, error, loading } = useFetch("/Vuelos/GetAllAvailable");
 
   return (
     <>
@@ -16,9 +16,8 @@ export function Flights() {
       ) : (
         <>
           <Header />
-          <main>
-            <h1 className="">Vuelos disponibles</h1>
-            <div className="flex justify-center gap-10 my-10 flex-wrap">
+          <main className="bg-[#F3F2F2] py-10">
+            <div className="flex justify-center gap-10 my-5 mx-52 px-0 py-20 flex-wrap bg-white rounded-xl shadow-xl">
               {data?.map((vuelo) => (
                 <FlightCard key={vuelo.idvuelo} vuelo={vuelo} />
               ))}
