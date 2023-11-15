@@ -1,16 +1,7 @@
 // DateInput.jsx
+import { formatDate } from "../../../utils/dateUtil.js";
 
 const DateInput = ({ label, minDate, selectedDate, setSelectedDate, placeholder, disabled }) => {
-    
-    const formatDate = (date) => {
-        const d = new Date(date),
-          month = "" + (d.getMonth() + 1),
-          day = "" + d.getDate(),
-          year = d.getFullYear();
-    
-        return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
-      };
-
     const handleDateChange = (e) => {
         const newDate = new Date(e.target.value);
         newDate.setDate(newDate.getDate() + 1);

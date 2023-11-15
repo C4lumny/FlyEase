@@ -1,19 +1,45 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import { TripInput } from "./TripInput";
+import { useFlightContext } from "../../../context/FlightProvider";
+import { Link } from "react-router-dom";
 import DateInput from "./DateInput";
+import { formatDate } from "../../../utils/dateUtil";
 
 export function SearcherForm() {
   const { data, loading, error } = useFetch("/Ciudades/GetAll");
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
+  const [origen, setOrigen] = useState("");
+  const [destino, setDestino] = useState("");
+  const { buscarVuelos } = useFlightContext();
   // Atributos para validad input de fecha
   const date = new Date();
 
   useEffect(() => {
     if (!isRoundTrip && returnDate) setReturnDate("");
   }, [isRoundTrip, returnDate]);
+
+  const handleClick = () => {
+    let newFlight;
+
+    if(isRoundTrip) {
+      newFlight = {
+        origen,
+        destino,
+        departureDate,
+        returnDate,
+      };
+    } else{
+      newFlight = {
+        origen,
+        destino,
+        departureDate,
+      };
+    }
+    buscarVuelos(newFlight);
+  };
 
   return (
     <div>
@@ -67,9 +93,9 @@ export function SearcherForm() {
           {/* Inputs */}
           <div className="flex text-black mt-5">
             {/* input origen */}
-            <TripInput placeholder="Ciudad de origen" data={data} />
+            <TripInput placeholder="Ciudad de origen" data={data} setValue={setOrigen} />
             {/* input destino */}
-            <TripInput placeholder="Ciudad de destino" data={data} />
+            <TripInput placeholder="Ciudad de destino" data={data} setValue={setDestino} />
             <div className="ml-10 flex">
               {/* input fecha ida */}
               <DateInput
@@ -91,9 +117,11 @@ export function SearcherForm() {
             </div>
           </div>
           {/* Boton comprar */}
-          <button type="button" className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60">
-            Buscar vuelos
-          </button>
+          <Link to="/booking">
+            <button type="button" onClick={handleClick} className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60">
+              Buscar vuelos
+            </button>
+          </Link>
         </div>
       )}
     </div>

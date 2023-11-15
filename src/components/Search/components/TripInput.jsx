@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import mapIcon from "../../../assets/mapPin.svg";
 
-export function TripInput({ placeholder, data }) {
+export function TripInput({ placeholder, data, setValue }) {
   const [inputValue, setInputValue] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [apiResults, setResults] = useState();
@@ -14,6 +14,7 @@ export function TripInput({ placeholder, data }) {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
+    setValue(value);
 
     if (searchTimeout.current) {
       clearTimeout(searchTimeout.current);
@@ -65,7 +66,10 @@ export function TripInput({ placeholder, data }) {
               <li
                 key={item.numerodocumento}
                 className="p-1 hover:bg-blue-300 hover:text-blue-600"
-                onClick={() => setInputValue(item.nombre)}
+                onClick={() => {
+                  setInputValue(item.nombre)
+                  setValue(item.nombre)
+                }}
               >
                 {item.nombre}
               </li>
