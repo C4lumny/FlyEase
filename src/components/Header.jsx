@@ -1,4 +1,4 @@
-import logo from "../../assets/Logo_FlyEase.png";
+import logo from "../assets/Logo_FlyEase.png";
 import { Link } from "react-router-dom";
 
 export function Header() {

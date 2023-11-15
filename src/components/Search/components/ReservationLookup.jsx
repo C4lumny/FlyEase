@@ -1,4 +1,4 @@
-import hash from "../../../../assets/hash.svg";
+import hash from "../../../assets/hash.svg";
 
 export function Lookup() {
   return (

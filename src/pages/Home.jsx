@@ -1,13 +1,10 @@
-import { Header } from "../common/Header";
-import { TravelSearcher } from "../common/Search/TravelSearcher";
-import { PromosAndPrices } from "../common/Promos-and-prices";
-import { Footer } from "../common/Footer-flyease";
-import Imagen from "../../assets/mujer-en-la-playa.jpg";
-import { usePostApi } from "../../hooks/usePost";
+import { Header } from "../components/Header";
+import { TravelSearcher } from "../components/Search/TravelSearcher";
+import { PromosAndPrices } from "../components/Promos-and-prices";
+import { Footer } from "../components/Footer-flyease";
+import Imagen from "../assets/mujer-en-la-playa.jpg";
 
 export function Home() {
-
-  console.log(usePostApi());
 
   return (
     <>

@@ -1,7 +1,7 @@
-import { Header } from "../common/Header";
-import { Footer } from "../common/Footer-flyease";
-import { TeamCard } from "../common/TeamCard";
-import plane from "../../assets/gif-plane.gif";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer-flyease";
+import { TeamCard } from "../components/TeamCard";
+import plane from "../assets/gif-plane.gif";
 
 export function About() {
   return (

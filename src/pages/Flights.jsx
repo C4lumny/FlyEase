@@ -1,7 +1,7 @@
-import { Footer } from "../common/Footer-flyease";
-import { Header } from "../common/Header";
-import { useFetch } from "../../hooks/useFetch";
-import { FlightCard } from "../common/FlightCard";
+import { Footer } from "../components/Footer-flyease";
+import { Header } from "../components/Header";
+import { useFetch } from "../hooks/useFetch";
+import { FlightCard } from "../components/FlightCard";
 import { Loader } from "./Loader";
 
 export function Flights() {

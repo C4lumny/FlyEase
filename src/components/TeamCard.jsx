@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import GithubIcon from "../../assets/git-icon.png";
+import GithubIcon from "../assets/git-icon.png";
 
 export function TeamCard({ nombre, cargo, imagen, github }) {
   return (

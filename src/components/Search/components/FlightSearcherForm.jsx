@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../../../../hooks/useFetch";
+import { useFetch } from "../../../hooks/useFetch";
 import { TripInput } from "./TripInput";
+import DateInput from "./DateInput";
 
 export function SearcherForm() {
   const { data, loading, error } = useFetch("/Ciudades/GetAll");
@@ -10,17 +11,8 @@ export function SearcherForm() {
   // Atributos para validad input de fecha
   const date = new Date();
 
-  const formatDate = (date) => {
-    const d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
-  };
-
   useEffect(() => {
-    if(!isRoundTrip && returnDate) setReturnDate("");
+    if (!isRoundTrip && returnDate) setReturnDate("");
   }, [isRoundTrip, returnDate]);
 
   return (
@@ -80,47 +72,27 @@ export function SearcherForm() {
             <TripInput placeholder="Ciudad de destino" data={data} />
             <div className="ml-10 flex">
               {/* input fecha ida */}
-              <div>
-                <p className="text-white mb-2 text-sm">Ida</p>
-                <div className="flex relative items-center">
-                  <input
-                    className="w-48 h-10 border text-sm pl-8"
-                    type="date"
-                    placeholder="Ciudad de destino"
-                    min={formatDate(date)}
-                    onChange={(e) => {
-                      const dateDepPlus1 = new Date(e.target.value);
-                      dateDepPlus1.setDate(dateDepPlus1.getDate() + 1);
-                      setDepartureDate(dateDepPlus1);
-                    }}
-                  />
-                </div>
-              </div>
+              <DateInput
+                label="Ida"
+                minDate={date}
+                selectedDate={departureDate}
+                setSelectedDate={setDepartureDate}
+                placeholder="Ciudad de destino"
+              />
               {/* input fecha vuelta */}
-              <div className="">
-                <p className="text-white mb-2 text-sm">Vuelta</p>
-                <div className="relative items-center">
-                  <input
-                    className="w-48 h-10 border text-sm pl-8"
-                    type="date"
-                    placeholder="Ciudad de destino"
-                    value={new Date(departureDate) > new Date(returnDate) ? formatDate(departureDate) : formatDate(returnDate)}
-                    min={!departureDate ? formatDate(date) : formatDate(departureDate)}
-                    onChange={(e) => {
-                      const dateRetPlus1 = new Date(e.target.value);
-                      dateRetPlus1.setDate(dateRetPlus1.getDate() + 1);
-                      setReturnDate(dateRetPlus1)
-                    }}
-                    disabled={(!isRoundTrip || !departureDate) ? true : false}
-                  />
-                  <span className={`text-red-500 block absolute ${!isRoundTrip || departureDate ? "hidden" : ""}`}>Seleccione una fecha de ida</span>
-                </div>
-              </div>
+              <DateInput
+                label="Vuelta"
+                minDate={!departureDate ? date : departureDate}
+                selectedDate={returnDate}
+                setSelectedDate={setReturnDate}
+                placeholder="Ciudad de destino"
+                disabled={!isRoundTrip || !departureDate}
+              />
             </div>
           </div>
           {/* Boton comprar */}
           <button type="button" className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60">
-            Comprar
+            Buscar vuelos
           </button>
         </div>
       )}

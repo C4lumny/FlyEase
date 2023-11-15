@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import mapIcon from "../../../../assets/mapPin.svg";
+import mapIcon from "../../../assets/mapPin.svg";
 
 export function TripInput({ placeholder, data }) {
   const [inputValue, setInputValue] = useState("");
