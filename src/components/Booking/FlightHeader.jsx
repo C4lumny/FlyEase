@@ -9,7 +9,7 @@ export function FlightHeader({flightInfo}) {
   const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
 
   return (
-    <div className="bg-white p-5 ">
+    <div className="bg-white p-5 sticky">
       <div className="flex mx-48">
         <Link to="/">
           <div className="flex gap-2.5 items-center h-14">

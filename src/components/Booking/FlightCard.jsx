@@ -1,15 +1,14 @@
 import planeIcon from "../../assets/plane.svg";
 
-export function FlightCard(vuelo) {
-  console.log(vuelo.vuelo);
-
-  const vueloInfo = vuelo.vuelo;
+export function FlightCard({vuelo, boleto, isSelected}) {
+  const vueloInfo = vuelo;
+  console.log(vuelo);
   const fechaSalida = new Date(vueloInfo.fechayhoradesalida);
   const fechaLlegada = new Date(vueloInfo.fechayhorallegada);
 
   return (
     <div className="mx-48">
-      <div className="flex h-32 border rounded-3xl shadow-lg bg-white cursor-pointer">
+      <div className={`flex h-32 border rounded-3xl shadow-lg bg-white cursor-pointer ${isSelected ? 'border-2 border-green-500' : ''}`} onClick={boleto}>
         <div className="flex py-5 px-10 gap-10 w-9/12">
           <div className="flex items-center justify-between w-9/12">
             <div>
@@ -17,7 +16,6 @@ export function FlightCard(vuelo) {
                 {fechaSalida.getHours().toString().padStart(2, "0")}:
                 {fechaSalida.getMinutes().toString().padStart(2, "0")}
               </p>
-              <p className="font-semibold">BOG</p>
             </div>
             <div className="h-5">
               <img src={planeIcon} alt="" className="h-full" />
@@ -27,7 +25,6 @@ export function FlightCard(vuelo) {
                 {fechaLlegada.getHours().toString().padStart(2, "0")}:
                 {fechaLlegada.getMinutes().toString().padStart(2, "0")}
               </p>
-              <p className="font-semibold">VUP</p>
             </div>
           </div>
           <div className="w-3/12">
