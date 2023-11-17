@@ -4,7 +4,6 @@ import { TripInput } from "./TripInput";
 import { useFlightContext } from "../../../context/FlightProvider";
 import { Link } from "react-router-dom";
 import DateInput from "./DateInput";
-import { formatDate } from "../../../utils/dateUtil";
 
 export function SearcherForm() {
   const { data, loading, error } = useFetch("/Ciudades/GetAll");

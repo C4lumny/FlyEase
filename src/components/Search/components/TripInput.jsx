@@ -41,7 +41,7 @@ export function TripInput({ placeholder, data, setValue }) {
       {placeholder === "Ciudad de origen" ? (
         <p className="text-white mb-2 text-sm">Origen</p>
       ) : (
-        <p className="text-white mb-2 text-sm">Vuelta</p>
+        <p className="text-white mb-2 text-sm">Destino</p>
       )}
       <div className="flex relative items-center">
         <img src={mapIcon} alt="" className="absolute h-4 w-4 left-2" />
@@ -64,7 +64,7 @@ export function TripInput({ placeholder, data, setValue }) {
           {apiResults.length > 0 && apiResults.some((result) => result.nombre.toLowerCase().includes(inputValue.toLowerCase())) ? (
             apiResults.map((item) => (
               <li
-                key={item.numerodocumento}
+                key={item.idciudad}
                 className="p-1 hover:bg-blue-300 hover:text-blue-600"
                 onClick={() => {
                   setInputValue(item.nombre)

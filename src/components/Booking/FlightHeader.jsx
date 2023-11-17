@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import departureIcon from "../../assets/departure.svg";
 import editIcon from "../../assets/EditIcon.svg";
 
-export function FlightHeader({infoVuelo}) {
-  const fecha = infoVuelo.departureDate;
+export function FlightHeader({flightInfo}) {
+  const fecha = flightInfo.departureDate;
   const opciones = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
   const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
 
@@ -25,7 +25,7 @@ export function FlightHeader({infoVuelo}) {
         </Link>
         <div className="ml-10 h-14">
           <p className="font-semibold text-lg">
-            {infoVuelo.origen} a {infoVuelo.destino}
+            {flightInfo.origen} a {flightInfo.destino}
           </p>
           <div className="flex gap-5 items-center mt-2 font-light">
             <div className="flex gap-2 items-center ">
