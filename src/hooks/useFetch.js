@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { ApiToken } from "../api/apiToken.js";
+import { useApiToken } from "../api/useApiToken.js";
 
 export function useFetch(endpoint) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = ApiToken();
+  const token = useApiToken();
 
   useEffect(() => {
     if (token === null) {

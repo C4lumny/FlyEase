@@ -39,7 +39,7 @@ export function Flights() {
       ) : error ? (
         <p>Ha ocurrido un error: {error}</p>
       ) : (
-        <div>
+        <div className="flex flex-col min-h-screen">
           {/* Header */}
           <FlightHeader flightInfo={flightInfo} />
           <main>
