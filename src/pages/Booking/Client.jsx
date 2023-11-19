@@ -3,13 +3,18 @@ import { Footer } from "../../components/Footer-flyease";
 import { FlightCard } from "../../components/Booking/FlightCard.jsx";
 import { useFlightContext } from "../../context/FlightProvider.jsx";
 import { useSelectedFlightContext } from "../../context/SelectedFlight.jsx";
+import { useClientContext } from "../../context/ClientProvider.jsx";
 import { useState } from "react";
 import departureIcon from "../../assets/departure.svg";
 import { useApiToken } from "../../api/useApiToken.js";
+import { Link } from "react-router-dom";
 
 export function Client() {
+  // Definicion de contextos
   const { flightInfo } = useFlightContext();
   const { SelectedflightInfo } = useSelectedFlightContext();
+  const { crearCliente } = useClientContext();
+  // Definicion de estados
   const [inputFocused, setInputFocused] = useState(false);
   const [selectFocused, setSelectFocused] = useState(false);
   const [inputHasValue, setInputHasValue] = useState(false);
@@ -58,10 +63,10 @@ export function Client() {
           celular: client.celular,
           correo: client.correo,
           fecharegistro: client.fecharegistro,
-        })
+        }),
       })
-      .then((response) => response.json())
-      .then((data) => console.log(data.response))
+        .then((response) => response.json())
+        .then((data) => console.log(data.response));
     } catch (error) {
       console.error("Error al realizar la solicitud POST:", error);
       // Puedes manejar el error aquí
@@ -69,10 +74,9 @@ export function Client() {
     }
   };
 
-  const postHandler = (e) => {
-    e.preventDefault();
-    console.log(client);
+  const postHandler = () => {
     saveClient(client);
+    crearCliente(client);
   };
 
   return (
@@ -173,12 +177,11 @@ export function Client() {
               placeholder="correo"
               onChange={(e) => setCorreo(e.target.value)}
             />
-            <button
-              className="mr-2 mb-10 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full"
-              onClick={postHandler}
-            >
-              Continuar
-            </button>
+            <Link to="/booking/details/ticket" onClick={postHandler}>
+              <button className="mr-2 mb-10 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full">
+                Continuar
+              </button>
+            </Link>
           </div>
         </div>
       </div>

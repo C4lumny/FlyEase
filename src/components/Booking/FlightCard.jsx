@@ -2,7 +2,6 @@ import planeIcon from "../../assets/plane.svg";
 
 export function FlightCard({vuelo, boleto, isSelected}) {
   const vueloInfo = vuelo;
-  console.log(vuelo);
   const fechaSalida = new Date(vueloInfo.fechayhoradesalida);
   const fechaLlegada = new Date(vueloInfo.fechayhorallegada);
 

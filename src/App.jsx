@@ -4,7 +4,9 @@ import { Flights } from "./pages/Booking/FlightBooking";
 import { About } from "./pages/About";
 import { FlightProvider } from "./context/FlightProvider";
 import { SelectedFlight } from "./context/SelectedFlight";
+import { ClientProvider } from "./context/ClientProvider";
 import { Client } from "./pages/Booking/Client";
+import { Ticket } from "./pages/Booking/Ticket";
 import { Destinations } from "./pages/Destinations";
 
 export function App() {
@@ -33,7 +35,21 @@ export function App() {
         element={
           <FlightProvider>
             <SelectedFlight>
-              <Client />
+              <ClientProvider>
+                <Client />
+              </ClientProvider>
+            </SelectedFlight>
+          </FlightProvider>
+        }
+      />
+      <Route
+        path="/booking/details/ticket"
+        element={
+          <FlightProvider>
+            <SelectedFlight>
+              <ClientProvider>
+                <Ticket />
+              </ClientProvider>
             </SelectedFlight>
           </FlightProvider>
         }

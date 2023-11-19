@@ -18,7 +18,6 @@ export function useApiToken() {
       .then((response) => response.json())
       .then((data) => {
         setToken(data.token);
-        console.log(data.token)
       })
       .catch((error) => {
         console.error("Error fetching token:", error);
