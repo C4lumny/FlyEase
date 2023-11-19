@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/PlaneSeats.css";
 import { useFetch } from "../../hooks/useFetch";
 
-const TicketBooking = () => {
+const PlaneSeats = () => {
   const [selectedSeat, setSelectedSeat] = useState(0);
 
   const handleTicketChange = (index) => {
@@ -29,13 +29,13 @@ const TicketBooking = () => {
     <div className="tickets">
       <div className="ticket-selector">
         <div className="head">
-          <div className="title">Movie Name</div>
+          <div className="title">Asientos del vuelo</div>
         </div>
         <div className="seats">
           <div className="status">
-            <div className="item">Available</div>
-            <div className="item">Booked</div>
-            <div className="item">Selected</div>
+            <div className="item">Disponible</div>
+            <div className="item">Ocupado</div>
+            <div className="item">Seleccionado</div>
           </div>
           <div className="all-seats">
             {Array.isArray(data.asientosTotales) &&
@@ -60,10 +60,10 @@ const TicketBooking = () => {
             <span className="count">Asiento {selectedSeat}</span>
           </span>
         </div>
-        <button type="button">Book</button>
+        <button type="button">Seleccionar</button>
       </div>
     </div>
   );
 };
 
-export default TicketBooking;
+export default PlaneSeats;
