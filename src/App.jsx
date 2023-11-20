@@ -5,6 +5,7 @@ import { About } from "./pages/About";
 import { FlightProvider } from "./context/FlightProvider";
 import { SelectedFlight } from "./context/SelectedFlight";
 import { ClientProvider } from "./context/ClientProvider";
+import { SeatsProvider } from "./context/SeatsProvider";
 import { Client } from "./pages/Booking/Client";
 import { Ticket } from "./pages/Booking/Ticket";
 import { Destinations } from "./pages/Destinations";
@@ -48,7 +49,9 @@ export function App() {
           <FlightProvider>
             <SelectedFlight>
               <ClientProvider>
-                <Ticket />
+                <SeatsProvider>
+                  <Ticket />
+                </SeatsProvider>
               </ClientProvider>
             </SelectedFlight>
           </FlightProvider>

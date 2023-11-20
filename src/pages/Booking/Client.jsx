@@ -66,7 +66,7 @@ export function Client() {
         }),
       })
         .then((response) => response.json())
-        .then((data) => console.log(data.response));
+        .then((data) => console.log("Cliente creado satisfactoriamente: ", data.response));
     } catch (error) {
       console.error("Error al realizar la solicitud POST:", error);
       // Puedes manejar el error aquí

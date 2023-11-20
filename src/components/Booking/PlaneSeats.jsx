@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "../../styles/PlaneSeats.css";
+import { useSeatsContext } from "../../context/SeatsProvider";
 import { useFetch } from "../../hooks/useFetch";
 
-const PlaneSeats = () => {
+const PlaneSeats = ({ idVuelo }) => {
   const [selectedSeat, setSelectedSeat] = useState(0);
+  const { crearAsiento } = useSeatsContext();
 
   const handleTicketChange = (index) => {
     if (selectedSeat === index) {
@@ -12,8 +14,13 @@ const PlaneSeats = () => {
       setSelectedSeat(index);
     }
   };
+  
+  const handleClick = () => {
+    const selectedSeatData = data.asientosTotales.find(asiento => asiento.posicion === selectedSeat);
+    crearAsiento(selectedSeatData);
+  }
 
-  const { data, loading, error } = useFetch(`/Vuelos/${77}/Avion/AsientosDisponibles`);
+  const { data, loading, error } = useFetch(`/Vuelos/${idVuelo}/Avion/AsientosDisponibles`);
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -44,6 +51,7 @@ const PlaneSeats = () => {
                   <input
                     type="checkbox"
                     name="tickets"
+                    className="input-seat"
                     id={`s${asiento.idasiento}`}
                     checked={selectedSeat === asiento.posicion}
                     onChange={() => handleTicketChange(asiento.posicion)}
@@ -60,7 +68,7 @@ const PlaneSeats = () => {
             <span className="count">Asiento {selectedSeat}</span>
           </span>
         </div>
-        <button type="button">Seleccionar</button>
+        <button type="button" onClick={() => handleClick()}>Seleccionar</button>
       </div>
     </div>
   );
