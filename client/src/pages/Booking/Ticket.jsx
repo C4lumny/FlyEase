@@ -26,7 +26,7 @@ export function Ticket() {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/create_preference", {
+      const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
         description: "Insano",
         price: 100000,
         quantity: 1,
