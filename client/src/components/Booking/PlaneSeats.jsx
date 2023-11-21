@@ -14,11 +14,11 @@ const PlaneSeats = ({ idVuelo }) => {
       setSelectedSeat(index);
     }
   };
-  
+
   const handleClick = () => {
-    const selectedSeatData = data.asientosTotales.find(asiento => asiento.posicion === selectedSeat);
+    const selectedSeatData = data.asientosTotales.find((asiento) => asiento.posicion === selectedSeat);
     crearAsiento(selectedSeatData);
-  }
+  };
 
   const { data, loading, error } = useFetch(`/Vuelos/${idVuelo}/Avion/AsientosDisponibles`);
 
@@ -46,19 +46,25 @@ const PlaneSeats = ({ idVuelo }) => {
           </div>
           <div className="all-seats">
             {Array.isArray(data.asientosTotales) &&
-              data.asientosTotales.map((asiento) => (
-                <React.Fragment key={asiento.idasiento}>
-                  <input
-                    type="checkbox"
-                    name="tickets"
-                    className="input-seat"
-                    id={`s${asiento.idasiento}`}
-                    checked={selectedSeat === asiento.posicion}
-                    onChange={() => handleTicketChange(asiento.posicion)}
-                  />
-                  <label htmlFor={`s${asiento.idasiento}`} className="seat"></label>
-                </React.Fragment>
-              ))}
+              data.asientosTotales.map((asiento) => {
+                const isBooked = data.asientosOcupados.some(
+                  (asientoOcupado) => asientoOcupado.idasiento === asiento.idasiento
+                );
+                return (
+                  <React.Fragment key={asiento.idasiento}>
+                    <input
+                      type="checkbox"
+                      name="tickets"
+                      className="input-seat"
+                      id={`s${asiento.idasiento}`}
+                      checked={selectedSeat === asiento.posicion}
+                      onChange={() => handleTicketChange(asiento.posicion)}
+                      disabled={isBooked}
+                    />
+                    <label htmlFor={`s${asiento.idasiento}`} className={isBooked ? "seat booked" : "seat"}></label>
+                  </React.Fragment>
+                );
+              })}
           </div>
         </div>
       </div>
@@ -68,7 +74,9 @@ const PlaneSeats = ({ idVuelo }) => {
             <span className="count">Asiento {selectedSeat}</span>
           </span>
         </div>
-        <button type="button" onClick={() => handleClick()}>Seleccionar</button>
+        <button type="button" onClick={() => handleClick()}>
+          Seleccionar
+        </button>
       </div>
     </div>
   );

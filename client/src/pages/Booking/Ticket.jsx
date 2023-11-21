@@ -12,7 +12,6 @@ import { useSelectedFlightContext } from "../../context/SelectedFlight.jsx";
 import { useClientContext } from "../../context/ClientProvider.jsx";
 import { useSeatsContext } from "../../context/SeatsProvider.jsx";
 //Imports de funciones
-import { useInsertBoleto } from "../../api/useInsertBoleto.js";
 
 export function Ticket() {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -20,19 +19,20 @@ export function Ticket() {
   const { SelectedflightInfo } = useSelectedFlightContext();
   const { clientInfo } = useClientContext();
   const { selectedSeat } = useSeatsContext();
-  const insertBoleto = useInsertBoleto();
 
   initMercadoPago("TEST-b662e221-e1ef-4721-b5c0-763a46d5e94b");
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
+      // const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
+        const response = await axios.post("http://localhost:8080/create_preference", {
         description: "Insano",
         price: 100000,
         quantity: 1,
       });
 
       const { id } = response.data;
+      console.log(response);
       return id;
     } catch (error) {
       console.log(error);
@@ -61,18 +61,24 @@ export function Ticket() {
           </div>
           <div className="flex flex-col justify-center gap-5">
             <div className="text-2xl font-bold">Información del cliente</div>
-            {selectedSeat ? <ClientInfoCard clientInfo={clientInfo} selectedSeat={selectedSeat.posicion} /> : null}
+            {selectedSeat ? (
+              <ClientInfoCard clientInfo={clientInfo} selectedSeat={selectedSeat.posicion} />
+            ) : (
+              <ClientInfoCard clientInfo={clientInfo} selectedSeat={""} />
+            )}
           </div>
         </div>
-        <div className="justify-end flex w-full">
+        <div className="items-end justify-center flex w-full flex-col">
           <button
             className="px-14 py-2 mt-10 bg-zinc-700 rounded-xl text-white"
-            // onClick={() => insertBoleto(clientInfo, SelectedflightInfo, selectedSeat)}
-            onClick={handleBuy}
+            onClick={() => {
+              // insertBoleto(clientInfo, SelectedflightInfo, selectedSeat);
+              handleBuy();
+            }}
           >
             Comprar
           </button>
-          {preferenceId && <Wallet initialization={{ preferenceId, redirectMode: 'modal' }} />}
+          {preferenceId && <Wallet initialization={{ preferenceId, redirectMode: "modal" }} />}
         </div>
       </div>
       <Footer />

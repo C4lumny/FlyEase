@@ -6,7 +6,6 @@ import { useSelectedFlightContext } from "../../context/SelectedFlight.jsx";
 import { useClientContext } from "../../context/ClientProvider.jsx";
 import { useState } from "react";
 import departureIcon from "../../assets/departure.svg";
-import { useApiToken } from "../../api/useApiToken.js";
 import { Link } from "react-router-dom";
 
 export function Client() {
@@ -27,7 +26,7 @@ export function Client() {
   const [celular, setCelular] = useState("");
   const [correo, setCorreo] = useState("");
   const fecharegistro = new Date().toISOString();
-  const token = useApiToken();
+
 
   const client = {
     numerodocumento,
@@ -47,35 +46,7 @@ export function Client() {
     }
   };
 
-  const saveClient = (client) => {
-    try {
-      fetch("https://flyeasewebapi.azurewebsites.net/FlyEaseApi/Clientes/Post", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          numerodocumento: client.numerodocumento,
-          tipodocumento: client.tipodocumento,
-          nombres: client.nombres,
-          apellidos: client.apellidos,
-          celular: client.celular,
-          correo: client.correo,
-          fecharegistro: client.fecharegistro,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log("Cliente creado satisfactoriamente: ", data.response));
-    } catch (error) {
-      console.error("Error al realizar la solicitud POST:", error);
-      // Puedes manejar el error aquí
-      throw error; // Puedes relanzar el error o manejarlo según tus necesidades
-    }
-  };
-
   const postHandler = () => {
-    saveClient(client);
     crearCliente(client);
   };
 

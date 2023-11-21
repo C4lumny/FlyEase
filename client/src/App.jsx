@@ -9,6 +9,8 @@ import { SeatsProvider } from "./context/SeatsProvider";
 import { Client } from "./pages/Booking/Client";
 import { Ticket } from "./pages/Booking/Ticket";
 import { Destinations } from "./pages/Destinations";
+import { ApprovedPayment } from "./pages/Booking/ApprovedPayment";
+import { DeclinedPayment } from "./pages/Booking/DeclinedPayment";
 
 export function App() {
   return (
@@ -57,6 +59,8 @@ export function App() {
           </FlightProvider>
         }
       />
+      <Route path="/booking/details/ticket/approved" element={<ApprovedPayment />} />
+      <Route path="/booking/details/ticket/declined" element={<DeclinedPayment />} />
       <Route path="/destinations" element={<Destinations />} />
       <Route path="/about" element={<About />} />
       <Route path="*" element={<h1 className="m-10 text-3xl">404 not found</h1>} />

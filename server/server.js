@@ -24,8 +24,8 @@ app.post("/create_preference", (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:5173/booking/details/ticket",
-      failure: "http://localhost:5173/booking/details/ticket",
+      success: "http://localhost:5173/booking/details/ticket/approved",
+      failure: "http://localhost:5173/booking/details/ticket/declined",
       pending: "",
     },
     auto_return: "approved",
