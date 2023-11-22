@@ -23,7 +23,7 @@ export function PromosAndPrices({ vuelo }) {
       <img
         src={`data:image/webp;base64, ${vuelo.aeropuerto_Destino.ciudad.imagen}`}
         alt=""
-        className="object-cover w-full h-full rounded-3xl brightness-50 hover:transform hover:scale-105 transition-all duration-500"
+        className="object-cover w-full h-full rounded-3xl brightness-75 hover:transform hover:scale-105 transition-all duration-500"
       />
       <div className="absolute bottom-0 left-0 p-4 text-white z-10">
         <Link to="/booking">

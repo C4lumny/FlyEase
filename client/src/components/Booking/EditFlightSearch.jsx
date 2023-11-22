@@ -25,6 +25,12 @@ export function EditFlightSearch({ onClose }) {
   }, [flightInfo]);
 
   const handleClick = () => {
+    // Verificar que todos los campos estén llenos
+    if (!origen || !destino || !departureDate || (isRoundTrip && !returnDate)) {
+      alert("Por favor, llena todos los campos antes de buscar.");
+      return;
+    }
+
     let newFlight;
 
     if (isRoundTrip) {
@@ -41,6 +47,7 @@ export function EditFlightSearch({ onClose }) {
         departureDate,
       };
     }
+
     buscarVuelos(newFlight);
   };
 

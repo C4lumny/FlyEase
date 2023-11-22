@@ -19,6 +19,17 @@ export function ReservationRecord() {
         <Loader />
       ) : error ? (
         <p>Ha ocurrido un error: {error}</p>
+      ) : !data || !dataClientResponse ? (
+        <div className="flex flex-col w-full h-screen">
+          <Header />
+          <div className="m-20">
+            <h1 className="text-4xl font-bold">Usuario no encontrado</h1>
+            <p className="text-lg font-semibold text-zinc-700">
+              No se encontraron parámetros con los criterios establecidos
+            </p>
+          </div>
+          <Footer />
+        </div>
       ) : (
         <div className="flex flex-col w-full h-screen">
           <Header />
@@ -40,7 +51,6 @@ export function ReservationRecord() {
                       <th>Categoria</th>
                       <th>Fecha salida</th>
                       <th>Precio</th>
-                      <th>Estado 2</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,9 +62,16 @@ export function ReservationRecord() {
                         <td>{item.vuelo.aeropuerto_Destino.nombre}</td>
                         <td>{item.asiento.posicion}</td>
                         <td>{item.asiento.categoria.nombre}</td>
-                        <td>{new Date(item.vuelo.fechayhoradesalida).toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
-                        <td>${item.preciototal.toLocaleString('es-ES')}</td>
-                        <td>{item.vuelo.estado.nombre}</td>
+                        <td>
+                          {new Date(item.vuelo.fechayhoradesalida).toLocaleString("es-ES", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </td>
+                        <td>${item.preciototal.toLocaleString("es-ES")}</td>
                       </tr>
                     ))}
                   </tbody>
