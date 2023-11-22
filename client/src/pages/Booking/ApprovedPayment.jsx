@@ -12,7 +12,7 @@ export function ApprovedPayment() {
   const insertBoleto = useInsertBoleto();
   //SessionStorage para persistir la informacion en caso de una actualizacion
   const clientInfo = JSON.parse(sessionStorage.getItem("cliente"));
-  const SelectedflightInfo = JSON.parse(sessionStorage.getItem("vuelo"));
+  const SelectedflightInfo = JSON.parse(sessionStorage.getItem("vueloIda"));
   const SelectedReturnFlightInfo = JSON.parse(sessionStorage.getItem("vueloVuelta"));
   const selectedSeatDeparture = JSON.parse(sessionStorage.getItem("asientoIda"));
   const selectedSeatReturn = JSON.parse(sessionStorage.getItem("asientoRetorno"));
