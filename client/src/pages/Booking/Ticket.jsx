@@ -104,10 +104,8 @@ export function Ticket() {
         <div className="items-end justify-center flex w-full mx-auto max-w-7xl flex-col">
           <button
             className="px-14 py-2 my-10 bg-zinc-700 rounded-xl text-white"
-            onClick={() => {
-              handleBuy();
-            }}
-            disabled={selectedSeatDeparture || selectedSeatReturn ? false : true}
+            onClick={handleBuy}
+            disabled={RoundtripflightInfo ? !(selectedSeatDeparture && selectedSeatReturn) : !selectedSeatDeparture}
           >
             Comprar
           </button>
