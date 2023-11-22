@@ -9,6 +9,7 @@ import PlaneSeats from "../../components/Booking/PlaneSeats.jsx";
 //Imports de contextos
 import { useFlightContext } from "../../context/FlightProvider.jsx";
 import { useSelectedFlightContext } from "../../context/SelectedFlight.jsx";
+import { useRoundtripFlightContext } from "../../context/RoundtripFlightProvider.jsx";
 import { useClientContext } from "../../context/ClientProvider.jsx";
 import { useSeatsContext } from "../../context/SeatsProvider.jsx";
 //Imports de funciones
@@ -17,22 +18,22 @@ export function Ticket() {
   const [preferenceId, setPreferenceId] = useState(null);
   const { flightInfo } = useFlightContext();
   const { SelectedflightInfo } = useSelectedFlightContext();
+  const { RoundtripflightInfo } = useRoundtripFlightContext();
   const { clientInfo } = useClientContext();
-  const { selectedSeat } = useSeatsContext();
+  const { selectedSeatDeparture, selectedSeatReturn } = useSeatsContext();
+  const precioVuelo = SelectedflightInfo.preciovuelo + RoundtripflightInfo.preciovuelo;
 
   initMercadoPago("TEST-b662e221-e1ef-4721-b5c0-763a46d5e94b");
 
   const createPreference = async () => {
     try {
-      // const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
-        const response = await axios.post("http://localhost:8080/create_preference", {
-        description: "Insano",
-        price: 100000,
+      const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
+        description: `Vuelo ida: ${SelectedflightInfo.idvuelo} Vuelo vuelta: ${RoundtripflightInfo.idvuelo}`,
+        price: precioVuelo,
         quantity: 1,
       });
 
       const { id } = response.data;
-      console.log(response);
       return id;
     } catch (error) {
       console.log(error);
@@ -46,35 +47,59 @@ export function Ticket() {
     }
   };
 
-  console.log(flightInfo);
   console.log(SelectedflightInfo);
-  console.log(clientInfo);
-  console.log(selectedSeat);
+  console.log(RoundtripflightInfo);
+
+  //SessionStorage para persistir la informacion en caso de una actualizacion
+  sessionStorage.setItem("cliente", JSON.stringify(clientInfo));
+  sessionStorage.setItem("vueloIda", JSON.stringify(SelectedflightInfo));
+  sessionStorage.setItem("vueloVuelta", JSON.stringify(RoundtripflightInfo));
+  sessionStorage.setItem("asientoIda", JSON.stringify(selectedSeatDeparture));
+  sessionStorage.setItem("asientoRetorno", JSON.stringify(selectedSeatReturn));
 
   return (
     <div className="flex flex-col min-h-screen">
       <FlightHeader flightInfo={flightInfo} />
-      <div className="ml-24 mr-48 my-16">
-        <div className=" grid grid-cols-2 gap-4">
-          <div className="ml-16">
+      <div className="w-full">
+        {/* Cuadricula de asientos */}
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-2 items-center mt-10">
+          <div className="flex justify-center">
             <PlaneSeats idVuelo={SelectedflightInfo.idvuelo} />
           </div>
-          <div className="flex flex-col justify-center gap-5">
+          {RoundtripflightInfo && (
+            <div className="flex justify-center">
+              <PlaneSeats idVuelo={RoundtripflightInfo.idvuelo} isReturnFlight={true} />
+            </div>
+          )}
+        </div>
+        {/* Informacion dle cliente */}
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-2 mt-16">
+          <div className="flex flex-col justify-center mr-10">
             <div className="text-2xl font-bold">Información del cliente</div>
-            {selectedSeat ? (
-              <ClientInfoCard clientInfo={clientInfo} selectedSeat={selectedSeat.posicion} />
+            {selectedSeatDeparture ? (
+              <ClientInfoCard clientInfo={clientInfo} selectedSeat={selectedSeatDeparture.posicion} />
             ) : (
               <ClientInfoCard clientInfo={clientInfo} selectedSeat={""} />
             )}
           </div>
+          {RoundtripflightInfo && (
+            <div className="flex flex-col justify-center ml-10">
+              <div className="text-2xl font-bold">Información del cliente</div>
+              {selectedSeatReturn ? (
+                <ClientInfoCard clientInfo={clientInfo} selectedSeat={selectedSeatReturn.posicion} />
+              ) : (
+                <ClientInfoCard clientInfo={clientInfo} selectedSeat={""} />
+              )}
+            </div>
+          )}
         </div>
-        <div className="items-end justify-center flex w-full flex-col">
+        <div className="items-end justify-center flex w-full mx-auto max-w-7xl flex-col">
           <button
-            className="px-14 py-2 mt-10 bg-zinc-700 rounded-xl text-white"
+            className="px-14 py-2 my-10 bg-zinc-700 rounded-xl text-white"
             onClick={() => {
-              // insertBoleto(clientInfo, SelectedflightInfo, selectedSeat);
               handleBuy();
             }}
+            disabled={selectedSeatDeparture && selectedSeatReturn ? false : true}
           >
             Comprar
           </button>

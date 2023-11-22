@@ -60,12 +60,12 @@ export function TripInput({ placeholder, data, setValue }) {
         />
       </div>
       {isActive && inputValue && (
-        <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer">
+        <ul className="absolute bg-slate-100 py-2 w-64 border-b border-gray cursor-pointer z-10">
           {apiResults.length > 0 && apiResults.some((result) => result.nombre.toLowerCase().includes(inputValue.toLowerCase())) ? (
             apiResults.map((item) => (
               <li
                 key={item.idciudad}
-                className="p-1 hover:bg-blue-300 hover:text-blue-600"
+                className="p-1 hover:bg-blue-300 hover:text-blue-600 "
                 onClick={() => {
                   setInputValue(item.nombre)
                   setValue(item.nombre)

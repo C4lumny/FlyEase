@@ -1,13 +1,18 @@
 import planeIcon from "../../assets/plane.svg";
 
-export function FlightCard({vuelo, boleto, isSelected}) {
+export function FlightCard({ vuelo, boleto, isSelected }) {
   const vueloInfo = vuelo;
   const fechaSalida = new Date(vueloInfo.fechayhoradesalida);
   const fechaLlegada = new Date(vueloInfo.fechayhorallegada);
 
   return (
     <div className="mx-48">
-      <div className={`flex h-32 border rounded-3xl shadow-lg bg-white cursor-pointer ${isSelected ? 'border-2 border-green-500' : ''}`} onClick={boleto}>
+      <div
+        className={`flex h-32 border rounded-3xl shadow-lg bg-white cursor-pointer ${
+          isSelected ? "border-2 border-green-500" : ""
+        }`}
+        onClick={boleto}
+      >
         <div className="flex py-5 px-10 gap-10 w-9/12">
           <div className="flex items-center justify-between w-9/12">
             <div>
@@ -34,13 +39,13 @@ export function FlightCard({vuelo, boleto, isSelected}) {
           </div>
         </div>
         {/* Imagen */}
-        <div className="w-3/12 overflow-hidden relative transform">
+        <div className="w-3/12">
           <img
             src={`data:image/jpeg;base64,${vueloInfo.aeropuerto_Destino.ciudad.imagen}`}
             alt=""
-            className="h-full w-full object-cover rounded-2xl hover:rotate-180"
+            className="h-full w-full object-cover rounded-r-2xl z-[1] overflow-hidden"  
           />
-          <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white via-[rgba(255,255,255,0.1)] to-transparent"></span>{" "}
+          <span className="top-0 left-0 w-full h-full bg-gradient-to-r from-white via-[rgba(255,255,255,0.1)] to-transparent"></span>{" "}
         </div>
       </div>
     </div>

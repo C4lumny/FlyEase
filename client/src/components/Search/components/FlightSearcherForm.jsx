@@ -38,6 +38,7 @@ export function SearcherForm() {
       };
     }
     buscarVuelos(newFlight);
+    console.log(newFlight);
   };
 
   return (

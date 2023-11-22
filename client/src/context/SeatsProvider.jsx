@@ -7,14 +7,19 @@ export const useSeatsContext = () => {
 }
 
 export const SeatsProvider = ({ children}) => {
-    const [selectedSeat, setSelectedSeat] = useState(null);
+    const [selectedSeatDeparture, setSelectedSeatDeparture] = useState(null);
+    const [selectedSeatReturn, setSelectedSeatReturn] = useState(null);
 
-    const crearAsiento = (newClientQuery) => {
-        setSelectedSeat(newClientQuery);
+    const crearAsiento = (newClientQuery, isReturnFlight) => {
+        if (isReturnFlight) {
+            setSelectedSeatReturn(newClientQuery);
+        } else {
+            setSelectedSeatDeparture(newClientQuery);
+        }
     };
 
     return (
-        <SeatsContext.Provider value={{ selectedSeat, crearAsiento }}>
+        <SeatsContext.Provider value={{ selectedSeatDeparture, selectedSeatReturn, crearAsiento }}>
             {children}
         </SeatsContext.Provider>
     );

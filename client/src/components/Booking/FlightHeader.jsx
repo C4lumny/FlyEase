@@ -1,12 +1,41 @@
 import Logo from "../../assets/Logo_FlyEase.png";
 import { Link } from "react-router-dom";
 import departureIcon from "../../assets/departure.svg";
+import returnIcon from "../../assets/returnIcon.png"
 import editIcon from "../../assets/EditIcon.svg";
+import { EditFlightSearch } from "./EditFlightSearch";
+import { useState, useEffect } from "react";
 
-export function FlightHeader({flightInfo}) {
-  const fecha = flightInfo.departureDate;
-  const opciones = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-  const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+export function FlightHeader({ flightInfo, showEdit }) {
+  const [isRoundTrip, setIsRoundTrip] = useState(false);
+  const fechaIda = flightInfo.departureDate
+  const opciones = { weekday: "short", day: "numeric", month: "short", year: "numeric" };
+  const fechaIdaFormateada = fechaIda.toLocaleDateString("es-ES", opciones);
+  // Fechas de regreso
+  let fechaRegreso;
+  let fechaRegresoFormateada;
+  const [showSearch, setShowSearch] = useState(false);
+
+  if(flightInfo.returnDate) {
+    fechaRegreso = flightInfo.returnDate;
+    fechaRegresoFormateada = fechaRegreso.toLocaleDateString("es-ES", opciones);
+  }
+
+  useEffect(() => {
+    if (flightInfo.returnDate) {
+      setIsRoundTrip(true);
+    } else {
+      setIsRoundTrip(false);
+    }
+  }, [flightInfo]);
+
+  const handleEditClick = () => {
+    setShowSearch(true);
+  };
+
+  const handleCloseClick = () => {
+    setShowSearch(false);
+  };
 
   return (
     <div className="bg-white p-5 sticky">
@@ -30,12 +59,30 @@ export function FlightHeader({flightInfo}) {
           <div className="flex gap-5 items-center mt-2 font-light">
             <div className="flex gap-2 items-center ">
               <img src={departureIcon} alt="" className="h-5" />
-              <p>{fechaFormateada}</p>
+              <p>{fechaIdaFormateada}</p>
             </div>
-            <span className="flex relative ml-5 gap-1 text-[#0190A0] underline cursor-pointer hover:text-[16.5px] hover:font-semibold">
-              <img src={editIcon} alt="" className="h-5" />
-              Editar
-            </span>
+            {isRoundTrip && (
+              <div className="flex gap-2 items-center ">
+              <img src={returnIcon} alt="" className="h-5" />
+              <p>{fechaRegresoFormateada}</p>
+            </div>
+            )}
+            {showEdit && (
+              <span
+                className="flex relative ml-5 gap-1 text-[#0190A0] underline cursor-pointer hover:text-[16.5px] hover:font-semibold"
+                onClick={handleEditClick}
+              >
+                <img src={editIcon} alt="" className="h-5" />
+                Editar
+              </span>
+            )}
+            {showSearch && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[3]">
+                <div className="bg-black bg-opacity-80 p-10 rounded h-[32rem]">
+                  <EditFlightSearch onClose={handleCloseClick} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,23 +1,57 @@
 import successIcon from "../../assets/successIcon.png";
 import { Link } from "react-router-dom";
 import html2pdf from "html2pdf.js";
-//Imports de contextos
-import { useSelectedFlightContext } from "../../context/SelectedFlight.jsx";
-import { useClientContext } from "../../context/ClientProvider.jsx";
-import { useSeatsContext } from "../../context/SeatsProvider.jsx";
+import { useEffect } from "react";
 //Imports de funciones
 import { useInsertBoleto } from "../../api/useInsertBoleto.js";
 import { useSaveClient } from "../../api/useSaveClient.js";
+import { useFetch } from "../../hooks/useFetch.js";
 
 export function ApprovedPayment() {
-  const { SelectedflightInfo } = useSelectedFlightContext();
-  const { clientInfo } = useClientContext();
-  const { selectedSeat } = useSeatsContext();
-  const saveClient = useSaveClient();
+  const { saveClient } = useSaveClient();
   const insertBoleto = useInsertBoleto();
+  //SessionStorage para persistir la informacion en caso de una actualizacion
+  const clientInfo = JSON.parse(sessionStorage.getItem("cliente"));
+  const SelectedflightInfo = JSON.parse(sessionStorage.getItem("vuelo"));
+  const SelectedReturnFlightInfo = JSON.parse(sessionStorage.getItem("vueloVuelta"));
+  const selectedSeatDeparture = JSON.parse(sessionStorage.getItem("asientoIda"));
+  const selectedSeatReturn = JSON.parse(sessionStorage.getItem("asientoRetorno"));
+  const clientId = useFetch(`/FlyEaseApi/Clientes/GetById/${clientInfo.numerodocumento}`);
+  let precioTotal = 0;
 
-  saveClient(clientInfo);
-  insertBoleto(clientInfo, SelectedflightInfo, selectedSeat);
+  if (!SelectedReturnFlightInfo) {
+    precioTotal = SelectedflightInfo.preciovuelo;
+  } else {
+    precioTotal = SelectedflightInfo.preciovuelo + SelectedReturnFlightInfo.preciovuelo;
+  }
+
+  console.log(clientId);
+
+  //Creacion del boleto si la transaccion es aprobada
+  useEffect(() => {
+    if (clientId.numerodocumento !== clientInfo.numerodocumento) {
+      // El cliente es nuevo
+      saveClient(clientInfo);
+    }
+    if (selectedSeatReturn) {
+      // El cliente ha seleccionado un asiento de regreso
+      insertBoleto(clientInfo, SelectedflightInfo, selectedSeatDeparture);
+      insertBoleto(clientInfo, SelectedReturnFlightInfo, selectedSeatReturn);
+    } else {
+      // El cliente no ha seleccionado un asiento de regreso
+      insertBoleto(clientInfo, SelectedflightInfo, selectedSeatDeparture);
+    }
+  }, [
+    clientInfo,
+    SelectedflightInfo,
+    selectedSeatDeparture,
+    selectedSeatReturn,
+    insertBoleto,
+    saveClient,
+    SelectedReturnFlightInfo,
+    clientId.numerodocumento,
+  ]);
+
   // Obtén la URL actual
   var url = window.location.href;
   var urlObj = new URL(url);
@@ -42,18 +76,18 @@ export function ApprovedPayment() {
     // Genera el PDF
     html2pdf().from(reciboElement).set(opcionesPDF).save();
   };
-  
+
   return (
-    <div className="bg-[#CFD8E9] w-full h-screen flex flex-col justify-center items-center">
+    <div className="bg-[#beeabe] w-full h-screen flex flex-col justify-center items-center">
       <div
         id="recibo"
-        className="ticket-card bg-white w-[25%] h-[60%] rounded-2xl shadow-md flex flex-col items-center py-5 px-5"
+        className="ticket-card bg-white 2xl:w-[25%] h-[60%] rounded-2xl shadow-md flex flex-col items-center py-5 px-5 2xl:h-[80%] lg:h-[90%] lg:w-[30%] md:w-[40%] md:h-screen"
       >
         <div className="p-5 bg-green-100 rounded-full">
           <img src={successIcon} alt="" className="w-10 h-10" />
         </div>
         <div className="mt-5 font-normal">Transacción Aprobada!</div>
-        <div className="my-5 font-bold text-2xl">COP $150.000</div>
+        <div className="my-5 font-bold text-2xl">COP ${precioTotal}</div>
         <span className="border-b border-zinc-400 w-[80%] mt-5"></span>
         <div className="w-[80%]">
           <div className="flex justify-between mt-5">
@@ -74,7 +108,9 @@ export function ApprovedPayment() {
           </div>
           <div className="flex justify-between mt-5">
             <div className="font-light">Cliente</div>
-            <div className="font-semibold">Nathan Ospino</div>
+            <div className="font-semibold">
+              {clientInfo.nombres} {clientInfo.apellidos}
+            </div>
           </div>
         </div>
         <button className="mt-6 py-3 px-10 border border-zinc-700 rounded-2xl" onClick={() => generarPDF()}>

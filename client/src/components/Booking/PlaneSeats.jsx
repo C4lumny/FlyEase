@@ -3,7 +3,7 @@ import "../../styles/PlaneSeats.css";
 import { useSeatsContext } from "../../context/SeatsProvider";
 import { useFetch } from "../../hooks/useFetch";
 
-const PlaneSeats = ({ idVuelo }) => {
+const PlaneSeats = ({ idVuelo, isReturnFlight }) => {
   const [selectedSeat, setSelectedSeat] = useState(0);
   const { crearAsiento } = useSeatsContext();
 
@@ -16,8 +16,13 @@ const PlaneSeats = ({ idVuelo }) => {
   };
 
   const handleClick = () => {
-    const selectedSeatData = data.asientosTotales.find((asiento) => asiento.posicion === selectedSeat);
-    crearAsiento(selectedSeatData);
+    if (isReturnFlight) {
+      const selectedSeatData = data.asientosTotales.find((asiento) => asiento.posicion === selectedSeat);
+      crearAsiento(selectedSeatData, true);
+    } else {
+      const selectedSeatData = data.asientosTotales.find((asiento) => asiento.posicion === selectedSeat);
+      crearAsiento(selectedSeatData);
+    }
   };
 
   const { data, loading, error } = useFetch(`/Vuelos/${idVuelo}/Avion/AsientosDisponibles`);
