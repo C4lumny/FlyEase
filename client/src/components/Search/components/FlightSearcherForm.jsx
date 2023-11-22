@@ -93,7 +93,7 @@ export function SearcherForm() {
           {/* Inputs */}
           <div className="flex text-black mt-5">
             {/* input origen */}
-            <TripInput placeholder="Ciudad de origen" data={data} setValue={setOrigen} />
+            <TripInput placeholder="Ciudad de origen" data={data} setValue={setOrigen} shouldUseParam={true} />
             {/* input destino */}
             <TripInput placeholder="Ciudad de destino" data={data} setValue={setDestino} />
             <div className="ml-10 flex">

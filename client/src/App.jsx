@@ -16,98 +16,106 @@ import { DeclinedPayment } from "./pages/Booking/DeclinedPayment";
 
 export function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <FlightProvider>
-            <Home />
-          </FlightProvider>
-        }
-      />
-      <Route
-        path="/booking"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <Flights />
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      />
-      <Route
-        path="/booking/round-trip"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <RoundtripFlightProvider>
-                <RoundTripFlight />
-              </RoundtripFlightProvider>
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      ></Route>
-      <Route
-        path="/booking/details"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <RoundtripFlightProvider>
-                <ClientProvider>
-                  <Client />
-                </ClientProvider>
-              </RoundtripFlightProvider>
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      />
-      <Route
-        path="/booking/details/ticket"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <RoundtripFlightProvider>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <FlightProvider>
+              <Home />
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/:nombre"
+          element={
+            <FlightProvider>
+              <Home />
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/booking"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
+                <Flights />
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/booking/round-trip"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
+                <RoundtripFlightProvider>
+                  <RoundTripFlight />
+                </RoundtripFlightProvider>
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        ></Route>
+        <Route
+          path="/booking/details"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
+                <RoundtripFlightProvider>
+                  <ClientProvider>
+                    <Client />
+                  </ClientProvider>
+                </RoundtripFlightProvider>
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/booking/details/ticket"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
+                <RoundtripFlightProvider>
+                  <ClientProvider>
+                    <SeatsProvider>
+                      <Ticket />
+                    </SeatsProvider>
+                  </ClientProvider>
+                </RoundtripFlightProvider>
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/booking/details/ticket/approved"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
                 <ClientProvider>
                   <SeatsProvider>
-                    <Ticket />
+                    <ApprovedPayment />
                   </SeatsProvider>
                 </ClientProvider>
-              </RoundtripFlightProvider>
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      />
-      <Route
-        path="/booking/details/ticket/approved"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <ClientProvider>
-                <SeatsProvider>
-                  <ApprovedPayment />
-                </SeatsProvider>
-              </ClientProvider>
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      />
-      <Route
-        path="/booking/details/ticket/declined"
-        element={
-          <FlightProvider>
-            <SelectedFlight>
-              <ClientProvider>
-                <SeatsProvider>
-                  <DeclinedPayment />
-                </SeatsProvider>
-              </ClientProvider>
-            </SelectedFlight>
-          </FlightProvider>
-        }
-      />
-      <Route path="/destinations" element={<Destinations />} />
-      <Route path="/about" element={<About />} />
-      <Route path="*" element={<h1 className="m-10 text-3xl">404 not found</h1>} />
-    </Routes>
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        />
+        <Route
+          path="/booking/details/ticket/declined"
+          element={
+            <FlightProvider>
+              <SelectedFlight>
+                <ClientProvider>
+                  <SeatsProvider>
+                    <DeclinedPayment />
+                  </SeatsProvider>
+                </ClientProvider>
+              </SelectedFlight>
+            </FlightProvider>
+          }
+        />
+        <Route path="/destinations" element={<Destinations />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<h1 className="m-10 text-3xl">404 not found</h1>} />
+      </Routes>
   );
 }

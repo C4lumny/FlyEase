@@ -25,7 +25,7 @@ export function Header() {
             <Link to="/">Inicio</Link>
           </li>
           <li className="list-none text-xl font-bold cursor-pointer text-white hover:text-yellow-300 duration-[0.25s]">
-            <Link to="/Vuelos">Destinos</Link>
+            <Link to="/destinations">Destinos</Link>
           </li>
           <li className="list-none text-xl font-bold cursor-pointer text-white hover:text-yellow-200 duration-[0.25s]">
             <Link to="/About">Acerca de</Link> 

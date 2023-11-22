@@ -1,15 +1,24 @@
 import { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import mapIcon from "../../../assets/mapPin.svg";
 
-export function TripInput({ placeholder, data, setValue }) {
+export function TripInput({ placeholder, data, setValue, shouldUseParam }) {
   const [inputValue, setInputValue] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [apiResults, setResults] = useState();
   const searchTimeout = useRef(null);
+  const { nombre = "" } = useParams();
 
   useEffect(() => {
     setResults(data);
   }, [data]);
+
+  useEffect(() => {
+    if (nombre && shouldUseParam) {
+      setInputValue(nombre);
+      setValue(nombre);
+    }
+  }, [nombre, shouldUseParam, setValue]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
