@@ -1,0 +1,2 @@
+/booking/details/ticket/approved/*    /booking/details/ticket/approved/index.html   200
+/booking/details/ticket/declined/*    /booking/details/ticket/declined/index.html   200
