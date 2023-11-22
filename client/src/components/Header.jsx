@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function Header() {
   return (
-    <header className="flex justify-between h-[90px] bg-[#dd2b23]">
+    <header className="flex justify-between h-[90px] bg-[#dd2b23] shrink-0">
       {/* Logo divs */}
       <div className="flex gap-2.5 ml-20 items-center">
         <img

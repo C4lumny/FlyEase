@@ -3,6 +3,7 @@ import { Home } from "./pages/Home";
 import { Flights } from "./pages/Booking/FlightBooking";
 import { RoundTripFlight } from "./pages/Booking/FlightBookingRt";
 import { About } from "./pages/About";
+import { ReservationRecord } from "./pages/ReservationRecord";
 import { FlightProvider } from "./context/FlightProvider";
 import { SelectedFlight } from "./context/SelectedFlight";
 import { ClientProvider } from "./context/ClientProvider";
@@ -114,6 +115,7 @@ export function App() {
           }
         />
         <Route path="/destinations" element={<Destinations />} />
+        <Route path="/flightrecord/:numerodocumento" element={<ReservationRecord />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<h1 className="m-10 text-3xl">404 not found</h1>} />
       </Routes>

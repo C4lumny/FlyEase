@@ -23,14 +23,14 @@ export function SearcherForm() {
   const handleClick = () => {
     let newFlight;
 
-    if(isRoundTrip) {
+    if (isRoundTrip) {
       newFlight = {
         origen,
         destino,
         departureDate,
         returnDate,
       };
-    } else{
+    } else {
       newFlight = {
         origen,
         destino,
@@ -93,9 +93,9 @@ export function SearcherForm() {
           {/* Inputs */}
           <div className="flex text-black mt-5">
             {/* input origen */}
-            <TripInput placeholder="Ciudad de origen" data={data} setValue={setOrigen} shouldUseParam={true} />
+            <TripInput placeholder="Ciudad de origen" data={data} setValue={setOrigen} />
             {/* input destino */}
-            <TripInput placeholder="Ciudad de destino" data={data} setValue={setDestino} />
+            <TripInput placeholder="Ciudad de destino" data={data} setValue={setDestino} shouldUseParam={true} />
             <div className="ml-10 flex">
               {/* input fecha ida */}
               <DateInput
@@ -118,7 +118,12 @@ export function SearcherForm() {
           </div>
           {/* Boton comprar */}
           <Link to="/booking">
-            <button type="button" onClick={handleClick} className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60">
+            <button
+              type="button"
+              onClick={handleClick}
+              disabled={!origen || !destino || !departureDate || (isRoundTrip && !returnDate)}
+              className="mt-9 mb-5 bg-red-500 py-2 px-8 rounded-3xl w-60"
+            >
               Buscar vuelos
             </button>
           </Link>

@@ -15,20 +15,22 @@ export function Destinations() {
       ) : error ? (
         <p>Un error ha ocurrido</p>
       ) : (
-        <div className="w-full h-screen flex flex-col">
-          <Header />
-          <div className="flex flex-col items-center mt-20 w-full">
-            <h1 className="text-xl font-semibold">Descubre los mejores lugares para visitar</h1>
-            <div className="max-w-7xl mx-auto w-full flex flex-wrap my-10 gap-10">
-              {data.map((ciudad) => (
-                <React.Fragment key={ciudad.id}>
-                  <DestinationCard ciudad={ciudad} />
-                </React.Fragment>
-              ))}
+        <>
+          <div className="w-full h-screen flex flex-col">
+            <Header />
+            <div className="flex flex-col items-center mt-20 w-full">
+              <h1 className="text-xl font-semibold">Descubre los mejores lugares para visitar</h1>
+              <div className="max-w-7xl mx-auto w-full flex flex-wrap my-10 gap-10">
+                {data.map((ciudad) => (
+                  <React.Fragment key={ciudad.id}>
+                    <DestinationCard ciudad={ciudad} />
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </>
       )}
     </>
   );
