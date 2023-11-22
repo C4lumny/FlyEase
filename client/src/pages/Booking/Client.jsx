@@ -17,7 +17,6 @@ export function Client() {
   const { RoundtripflightInfo } = useRoundtripFlightContext();
   const { crearCliente } = useClientContext();
   // Definicion de estados
-  const [inputValue, setInputValue] = useState("");
   const [tipodocumento, setTipoDocumento] = useState("");
   const [numerodocumento, setNumeroCedula] = useState("");
   const [nombres, setNombres] = useState("");
@@ -65,12 +64,18 @@ export function Client() {
     fecharegistro,
   };
 
-  const handleInput = (e) => {
+  const handleInput = (e, setter) => {
     const newInputValue = e.target.value.replace(/[^0-9]/g, ""); // Elimina caracteres no numéricos
 
     if (newInputValue.length <= 10) {
-      setInputValue(newInputValue);
+      setter(newInputValue);
     }
+  };
+
+  const handleInputLettersOnly = (e, setter) => {
+    const newInputValue = e.target.value.replace(/[^a-zA-Z\s]/g, ""); // Elimina números y caracteres especiales
+
+    setter(newInputValue);
   };
 
   const postHandler = () => {
@@ -149,15 +154,14 @@ export function Client() {
                   type="text"
                   id="numeroCedula"
                   className="border border-zinc-300 px-3 py-4 w-full rounded-2xl"
-                  value={inputValue}
+                  value={numerodocumento}
                   pattern="[0-9]*"
-                  onInput={handleInput}
+                  onInput={(e) => handleInput(e, setNumeroCedula)}
                   max={10}
                   onFocus={() => handleFocus("numeroCedula")}
                   onBlur={() => handleBlur("numeroCedula")}
                   onChange={(e) => {
                     handleInputChange("numeroCedula", e.target.value);
-                    setNumeroCedula(e.target.value);
                   }}
                 />
                 <label
@@ -181,10 +185,11 @@ export function Client() {
                   id="nombres"
                   className="border border-zinc-300 px-3 py-4 w-full rounded-2xl"
                   onFocus={() => handleFocus("nombres")}
+                  value={nombres}
                   onBlur={() => handleBlur("nombres")}
                   onChange={(e) => {
                     handleInputChange("nombres", e.target.value);
-                    setNombres(e.target.value);
+                    handleInputLettersOnly(e, setNombres)
                   }}
                 />
                 <label
@@ -205,10 +210,11 @@ export function Client() {
                   id="apellidos"
                   className="border border-zinc-300 px-3 py-4 w-full rounded-2xl"
                   onFocus={() => handleFocus("apellidos")}
+                  onInput={(e) => handleInputLettersOnly(e, setApellidos)}
+                  value={apellidos}
                   onBlur={() => handleBlur("apellidos")}
                   onChange={(e) => {
                     handleInputChange("apellidos", e.target.value);
-                    setApellidos(e.target.value);
                   }}
                 />
                 <label
@@ -231,11 +237,12 @@ export function Client() {
                   type="text"
                   id="celular"
                   className="border border-zinc-300 px-3 py-4 w-full rounded-2xl"
+                  value={celular}
+                  onInput={(e) => handleInput(e, setCelular)}
                   onFocus={() => handleFocus("celular")}
                   onBlur={() => handleBlur("celular")}
                   onChange={(e) => {
                     handleInputChange("celular", e.target.value);
-                    setCelular(e.target.value);
                   }}
                 />
                 <label
@@ -252,7 +259,7 @@ export function Client() {
               {/* Correo */}
               <div className="relative w-1/2">
                 <input
-                  type="text"
+                  type="email"
                   id="correo"
                   className="border border-zinc-300 px-3 py-4 w-full rounded-2xl"
                   onFocus={() => handleFocus("correo")}
@@ -273,7 +280,10 @@ export function Client() {
               </div>
             </div>
             <Link to="/booking/details/ticket" onClick={postHandler}>
-              <button className="mr-2 mb-10 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full" disabled={!allFieldsFilled}>
+              <button
+                className="mr-2 mb-10 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full"
+                disabled={!allFieldsFilled}
+              >
                 Continuar
               </button>
             </Link>

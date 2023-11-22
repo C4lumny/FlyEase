@@ -77,10 +77,10 @@ export function RoundTripFlight() {
               )}
             </div>
           </div>
-          <div className="mx-48 flex justify-end">
+          <div className="mx-48 flex justify-end mb-10">
             <Link to={"/booking/details"}>
               <button
-                className="mr-2 mb-10 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full"
+                className="mr-2 py-3 px-10 bg-zinc-900 text-white font-semibold rounded-full"
                 disabled={!selectedFlight}
                 hidden={!(flightsFliter(flightInfo).length > 0)}
               >
