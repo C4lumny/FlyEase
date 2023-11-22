@@ -21,14 +21,22 @@ export function Ticket() {
   const { RoundtripflightInfo } = useRoundtripFlightContext();
   const { clientInfo } = useClientContext();
   const { selectedSeatDeparture, selectedSeatReturn } = useSeatsContext();
-  const precioVuelo = SelectedflightInfo.preciovuelo + RoundtripflightInfo.preciovuelo;
+  let precioVuelo;
+
+  if (!RoundtripflightInfo) {
+    precioVuelo = SelectedflightInfo.preciovuelo;
+  } else {
+    precioVuelo = SelectedflightInfo.preciovuelo + RoundtripflightInfo.preciovuelo;
+  }
 
   initMercadoPago("TEST-b662e221-e1ef-4721-b5c0-763a46d5e94b");
 
   const createPreference = async () => {
     try {
       const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
-        description: `Vuelo ida: ${SelectedflightInfo.idvuelo} Vuelo vuelta: ${RoundtripflightInfo.idvuelo}`,
+        description:
+          `Vuelo ida: ${SelectedflightInfo.idvuelo}` +
+          (RoundtripflightInfo ? ` Vuelo vuelta: ${RoundtripflightInfo.idvuelo}` : ""),
         price: precioVuelo,
         quantity: 1,
       });
@@ -99,7 +107,7 @@ export function Ticket() {
             onClick={() => {
               handleBuy();
             }}
-            disabled={selectedSeatDeparture && selectedSeatReturn ? false : true}
+            disabled={selectedSeatDeparture || selectedSeatReturn ? false : true}
           >
             Comprar
           </button>
