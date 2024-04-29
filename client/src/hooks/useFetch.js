@@ -13,7 +13,7 @@ export function useFetch(endpoint) {
     }
 
     setLoading(true);
-    fetch(`https://flyeasewebapi.azurewebsites.net/FlyEaseApi${endpoint}`, {
+    fetch(`https://flyeasemanager.site/FlyEaseApi${endpoint}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

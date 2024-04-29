@@ -6,7 +6,7 @@ export function useApiToken() {
     "c30d0407030207885b4f9d804d3d7dd23b0119973cc23815e533e67cb774ef6cd5dd9e4d3aee7fd67ee7a1cd1b1d0bc67a49f82ce120dd6dd7b895f7c7701c2d513067502274296ef5c91ff9";
 
   useEffect(() => {
-    fetch(`https://flyeasewebapi.azurewebsites.net/FlyEaseApi/ApplicationTokens/GenerateAppsToken`, {
+    fetch(`https://flyeasemanager.site/FlyEaseApi/ApplicationTokens/GenerateAppsToken`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

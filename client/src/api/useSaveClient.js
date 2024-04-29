@@ -5,7 +5,7 @@ export const useSaveClient = () => {
 
   const saveClient = (client) => {
     try {
-      fetch("https://flyeasewebapi.azurewebsites.net/FlyEaseApi/Clientes/Post", {
+      fetch("https://flyeasemanager.site/FlyEaseApi/Clientes/Post", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

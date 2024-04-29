@@ -19,7 +19,7 @@ export const useInsertBoleto = () => {
         };
         
 
-        fetch("https://flyeasewebapi.azurewebsites.net/FlyEaseApi/Boletos/Post", {
+        fetch("https://flyeasemanager.site/FlyEaseApi/Boletos/Post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
