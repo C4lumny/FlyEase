@@ -24,8 +24,8 @@ app.post("/create_preference", (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://flyease.netlify.app/booking/details/ticket/approved",
-      failure: "https://flyease.netlify.app/booking/details/ticket/declined",
+      success: "https://fly-ease.vercel.app/booking/details/ticket/approved",
+      failure: "https://fly-ease.vercel.app/booking/details/ticket/declined",
       pending: "",
     },
     auto_return: "approved",
