@@ -33,7 +33,7 @@ export function Ticket() {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("https://flyease-dev-hcss.4.us-1.fl0.io/create_preference", {
+      const response = await axios.post("https://flyease.onrender.com/create_preference", {
         description:
           `Vuelo ida: ${SelectedflightInfo.idvuelo}` +
           (RoundtripflightInfo ? ` Vuelo vuelta: ${RoundtripflightInfo.idvuelo}` : ""),
